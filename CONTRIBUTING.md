@@ -37,7 +37,7 @@ These commands will help you do this:
 git checkout -b `your-branch-name`
 ```
 
-### Make commits to your feature branch. 
+### Make commits to your feature branch.
 
 Prefix each commit like so
   - (feat) Add a new feature
@@ -118,6 +118,8 @@ else, just repeat again.
 Thanks for contributing!
 
 ### Guidelines
+
+Just editing this for the sake of the exercise. 
 
 1. Uphold the current code standard:
     - Keep your code [DRY][].
