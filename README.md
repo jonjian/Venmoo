@@ -1,6 +1,6 @@
 # Project Name
 
-> Insert Pithy project description here
+<!-- > Insert Pithy project description here -->
 
 ## Team
 
