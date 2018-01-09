@@ -8,7 +8,7 @@
     "node": ">=6.4.0"
   },
   "scripts": {
-    "start": "webpack -d --watch",
+    "start": "webpack --inspect -d --watch",
     "server": "nodemon ./server/index.js",
     "test": ""
   },
