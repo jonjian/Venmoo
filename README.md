@@ -4,10 +4,10 @@
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  -Jonathan Jian
+  -Aaron Dean
+  -Jake Luton
+  -Alex Wein
 
 ## Table of Contents
 
