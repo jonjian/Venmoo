@@ -2,6 +2,7 @@ import React from 'react';
 import ProfilePage from './ProfilePage.jsx';
 import Login from './Login.jsx';
 import { Link, Route, Switch } from 'react-router-dom';
+import SignUp from './SignUp.jsx';
 
 class Main extends React.Component {
   constructor() {
@@ -14,8 +15,10 @@ class Main extends React.Component {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/profilepage" component={ProfilePage} />
+          <Route path="/signup" component={SignUp} />
         </Switch>
-      </div>);
+      </div>
+    );
   }
 }
 export default Main;
