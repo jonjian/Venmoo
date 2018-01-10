@@ -10,7 +10,7 @@
   "scripts": {
     "start": "webpack -d --watch",
     "server": "nodemon --inspect ./server/index.js",
-    "test": "mocha"
+    "test": "mocha ./test/test.js --exit"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
