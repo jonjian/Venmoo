@@ -1,8 +1,9 @@
 import React from 'react';
-import ProfilePage from './ProfilePage.jsx';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
+
+import ProfilePage from './ProfilePage.jsx';
 
 class Login extends React.Component {
   constructor() {
