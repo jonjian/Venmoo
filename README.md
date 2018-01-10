@@ -32,6 +32,16 @@
 - etc
 
 ## Development
+To set up Database:
+  1. Install postgres using the following commands, with homebrew installed:
+  brew update 
+  brew install postgresql
+  2. To run the schema file and generate the database, run the following command from the Venmoo root directory:
+  psql -f ./database/schema.sql postgres
+  3. To open the postgres shell and directly manipulate the database, enter the following from the command line:
+  psql postgres
+
+  A cheatsheet of psql commands can be found here: http://www.postgresonline.com/downloads/special_feature/postgresql83_psql_cheatsheet.pdf
 
 ### Installing Dependencies
 
