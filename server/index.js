@@ -1,5 +1,6 @@
 // import dotenv from 'dotenv';
 const path = require('path');
+const pg = require('pg');
 const express = require('express');
 const dotenv = require('dotenv');
 
@@ -11,6 +12,21 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 // const indexPath = path.join(__dirname, '../index.html');
+
+app.get('/db', (request, response) => {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('SELECT * FROM test_table', (err, result) => {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('pages/db', {results: result.rows} ); }
+    });
+  });
+});
+
+
+
 
 // app.get('/', (request, response) => {
 //   res.send({'yo'})
