@@ -16,8 +16,10 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 //   res.send({'yo'})
 // });
 
+if (!module.parent) {
+  app.listen(PORT)
+  console.log(`Listening on ${PORT}`);
+}
 
-app.listen(PORT);
-console.log(`Listening on ${PORT}`);
 
 module.exports.app = app;
