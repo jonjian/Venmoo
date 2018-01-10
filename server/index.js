@@ -19,10 +19,8 @@ app.get('/db', (request, response) => {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
-      else {
-        response.statusCode = 200;
-        response.send(JSON.stringify({results: result.rows}));
-       };
+      else
+       { response.render('pages/db', {results: result.rows} ); }
     });
   });
 });
