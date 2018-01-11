@@ -1,46 +1,12 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 const { expect } = require('chai');
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
-<<<<<<< HEAD
 const supertest = require('supertest');
-
 const request = supertest.agent(server);
-=======
-=======
-const ReactTestUtils = require('react-dom/test-utils')
-const expect = require('chai').expect;
-const server = require('./../server/index.js');
-const React = require('react');
-const Form = require('../client/src/components/Form.jsx');
-// console.log(ReactTestUtils)
-console.log(React.createElement);
-describe('form', function() {
-  var app;
 
-  beforeEach(function () {
-
-    ReactTestUtils.renderIntoDocument(React.createElement(Form));
-  });
-
-  it('should be a stateful class component', function () {
-    expect(true).to.be.true;
-    // expect(React.Component.isPrototypeOf(Form)).to.be.true;
-  });
-
-});
->>>>>>> Uses dummy test to configure testing frameworks
-<<<<<<< HEAD
->>>>>>> test package and bundle
-=======
-=======
 const { expect } = require('chai');
 const server = require('./../server/index.js');
 const db = require('./../database/index.js');
->>>>>>> Something is happening
->>>>>>> revisiting commit
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';
