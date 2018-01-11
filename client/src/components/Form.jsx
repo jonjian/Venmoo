@@ -1,4 +1,5 @@
 import React from 'react';
+// const React = require('react');
 // import Pay from './Pay';
 // import Request from './Request';
 
@@ -53,16 +54,14 @@ class Form extends React.Component {
 
   formSubmitHandler(event) {
     event.preventDefault();
-    if(this.state.isPayment) {
-      console.log('Sending ' + this.state.otherUser + ' $' + this.state.amount + ' saying ' + this.state.message);
-    } else {
-      console.log('Requesting ' + this.state.otherUser + ' $' + this.state.amount + ' saying ' + this.state.message);
-    }
+    // if(this.state.isPayment) {
+    // } else {
+    // }
   }
 
   render() {
     return(
-      <div id='form'>
+      <div id="form">
         <br />
         <h1> {this.state.isPayment ? 'TRUE' : 'FALSE'} </h1>
         <div className='tab'>
@@ -93,7 +92,7 @@ class Form extends React.Component {
           (<div> <button id="decisionBtn" type="submit"> Request </button> </div>)}
         </form>
       </div>
-  )}
+  )};
 }
 
 export default Form;

@@ -10,8 +10,12 @@
   "scripts": {
     "start": "webpack -d --watch",
     "server": "nodemon --inspect ./server/index.js",
+<<<<<<< HEAD
     "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
     "lint": "./node_modules/.bin/eslint ."
+=======
+    "test": "mocha --compilers js:babel-register ./test/test.js --exit"
+>>>>>>> Uses dummy test to configure testing frameworks
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta.3",
