@@ -95,8 +95,12 @@ class Form extends React.Component {
       console.log(response)
 =======
     .then((response) => {
+<<<<<<< HEAD
       console.log(response.data)
 >>>>>>> Adds axios POST request
+=======
+      console.log(response)
+>>>>>>> More test fixing
     })
     .catch((error) => {
       console.log(error);

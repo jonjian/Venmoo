@@ -16,6 +16,7 @@ const request = supertest.agent(server);
 const request = supertest.agent(server);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Clear conflict in test
 
@@ -25,6 +26,8 @@ const { expect } = require('chai');
 const server = require('./../server/index.js');
 const db = require('./../database/index.js');
 >>>>>>> Clears up previous merge conflicts in test document
+=======
+>>>>>>> Adjusts tests
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';
@@ -57,6 +60,7 @@ describe('server', () => {
   });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   describe('POST /payments and /request', () => {
     it('should 201 when posting to /payment', function(done) {
     request
@@ -88,9 +92,19 @@ describe('server', () => {
 =======
   describe('POST /payments', () => {
     it('should return an object with response data saying success', function(done) {
+=======
+  describe('POST /payment', () => {
+    it('should 201 for success connection', function(done) {
+>>>>>>> More test fixing
       request
-        .post('/payments', {})
-
+        .post('/payment', {
+          username: 'test',
+          amount: '20',
+          isPayment: true,
+          message: 'pay'
+        })
+        .expect(201)
+        .then(done);
     })
 
 >>>>>>> More clarity
