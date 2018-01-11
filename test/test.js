@@ -1,25 +1,10 @@
 const { expect } = require('chai');
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
-<<<<<<< HEAD
 
-=======
->>>>>>> Clears up previous merge conflicts in test document
 const supertest = require('supertest');
 const request = supertest.agent(server);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
-=======
->>>>>>> Begins tests
-const { expect } = require('chai');
-const server = require('./../server/index.js');
-const db = require('./../database/index.js');
->>>>>>> Clears up previous merge conflicts in test document
-=======
->>>>>>> Adjusts tests
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';
@@ -51,17 +36,17 @@ describe('server', () => {
     })
   });
 
-  describe('POST /payment', () => {
-    it('should 201 for success connection', function(done) {
+  describe('POST /payments', () => {
+    it('should 201 when making post request with data', function(done) {
       request
-        .post('/payment', {
-          username: 'test',
-          amount: '20',
+        .post('/payments', {
+          username: 'yo',
+          amount: '30',
           isPayment: true,
-          message: 'pay'
+          message: 'hm'
         })
-        .expect(201)
-        .then(done);
+        .expect(201, done)
+
     })
 
 
