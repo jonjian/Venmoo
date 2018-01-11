@@ -6,7 +6,7 @@ const TransactionHistory = props => (
     Transaction History:
     {props.transactionHist.map(entry => (
       <div>
-        Entry
+        <TransactionEntry transaction={entry} />
       </div>
     ))}
   </div>
