@@ -3,12 +3,20 @@ const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
 <<<<<<< HEAD
 
+=======
+>>>>>>> Clears up previous merge conflicts in test document
 const supertest = require('supertest');
+<<<<<<< HEAD
 const request = supertest.agent(server);
 
 =======
 const supertest = require('supertest');
 const request = supertest.agent(server);
+=======
+const request = supertest.agent(server);
+<<<<<<< HEAD
+=======
+>>>>>>> Clear conflict in test
 
 const { expect } = require('chai');
 const server = require('./../server/index.js');
