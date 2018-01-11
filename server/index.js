@@ -8,6 +8,11 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
+
+
+
+
+
 <<<<<<< HEAD
 <<<<<<< HEAD
 app.get('/user/:id', (req, res) => {
@@ -21,6 +26,17 @@ app.get('/user/:id', (req, res) => {
     });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
 
 =======
 =======
