@@ -14,6 +14,8 @@
     "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0-beta.3",
     "css-loader": "^0.28.8",
     "dotenv": "^4.0.0",
