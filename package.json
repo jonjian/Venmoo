@@ -12,13 +12,19 @@
     "server": "nodemon --inspect ./server/index.js",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Updates package
     "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
 =======
 
     "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
     "lint": "./node_modules/.bin/eslint .",
+<<<<<<< HEAD
 =======
 >>>>>>> Npm installs body parser and axios to handle http requesting
+=======
+>>>>>>> Updates package
     "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
 >>>>>>> Clears package json
     "lint": "./node_modules/.bin/eslint ."
