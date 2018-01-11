@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 
 class Form extends React.Component {
   constructor(props) {
@@ -52,7 +52,19 @@ class Form extends React.Component {
 
   formSubmitHandler(event) {
     event.preventDefault();
-
+    var url = this.state.isPayment ? '/payment' : '/request';
+    axios.post(url, {
+      username: this.state.otherUser,
+      amount: this.state.amount,
+      isPayment: this.state.isPayment,
+      message: this.state.message
+    })
+    .then((response) => {
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   render() {
