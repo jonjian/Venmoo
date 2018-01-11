@@ -4,16 +4,20 @@ import React from 'react';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Fixed profilepage merge conflict
 =======
 >>>>>>> More merging
 =======
 >>>>>>> Wrote important tests
+=======
+>>>>>>> Adjusted all merge conflicts
 
 import Form from './Form.jsx'
 import TransactionHistory from './TransactionHistory.jsx';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
@@ -33,6 +37,8 @@ import TransactionHistory from './TransactionHistory.jsx';
 >>>>>>> Just cleared up previous conflicts
 =======
 >>>>>>> Wrote important tests
+=======
+>>>>>>> Adjusted all merge conflicts
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
@@ -53,6 +59,7 @@ class ProfilePage extends React.Component {
 >>>>>>> More merging
         <Form />
         <TransactionHistory transactionHist={this.props.transactionHist}/>
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
@@ -74,6 +81,8 @@ class ProfilePage extends React.Component {
         <TransactionHistory transactionHist={this.props.transactionHist}/>
 
 >>>>>>> Wrote important tests
+=======
+>>>>>>> Adjusted all merge conflicts
       </div>
     );
   }
