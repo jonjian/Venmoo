@@ -8,8 +8,11 @@ const db = require('./../database/index.js');
 const supertest = require('supertest');
 const request = supertest.agent(server);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
+=======
+>>>>>>> Begins tests
 const { expect } = require('chai');
 const server = require('./../server/index.js');
 const db = require('./../database/index.js');
@@ -44,6 +47,17 @@ describe('server', () => {
           .expect(404, done)
     })
   });
+
+  describe('POST /payments', () => {
+    it('should return an object with response data saying success', function(done) {
+      request
+        .post('/payments', {})
+
+    })
+
+
+  })
+
 });
 
 
