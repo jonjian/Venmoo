@@ -9,6 +9,8 @@ import ProfilePage from '../client/src/components/ProfilePage.jsx';
 import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
 
+console.log(process.env);
+
 configure({ adapter: new Adapter() });
 
 describe('server', () => {
