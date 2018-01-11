@@ -60,7 +60,7 @@ class Form extends React.Component {
       message: this.state.message
     })
     .then((response) => {
-      console.log(response.data)
+      console.log(response)
     })
     .catch((error) => {
       console.log(error);

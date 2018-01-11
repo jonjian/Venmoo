@@ -9,6 +9,7 @@ const supertest = require('supertest');
 const request = supertest.agent(server);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 =======
@@ -17,6 +18,8 @@ const { expect } = require('chai');
 const server = require('./../server/index.js');
 const db = require('./../database/index.js');
 >>>>>>> Clears up previous merge conflicts in test document
+=======
+>>>>>>> Adjusts tests
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';
@@ -30,14 +33,14 @@ configure({ adapter: new Adapter() });
 
 describe('server', () => {
   describe('GET /user/:id', () => {
-    xit('should return an object of user info when id is a user', function(done) {
+    it('should return an object of user info when id is a user', function(done) {
       request
           .get('/user/1')
           .expect(200)
           .expect(/annie/, done) //not perfect put better than anything we got
     })
 
-    xit('should 404 when given an invalid user id', function(done) {
+    it('should 404 when given an invalid user id', function(done) {
       request
         .get('/user/999999')
         .expect(404, done)
@@ -48,11 +51,17 @@ describe('server', () => {
     })
   });
 
-  describe('POST /payments', () => {
-    it('should return an object with response data saying success', function(done) {
+  describe('POST /payment', () => {
+    it('should 201 for success connection', function(done) {
       request
-        .post('/payments', {})
-
+        .post('/payment', {
+          username: 'test',
+          amount: '20',
+          isPayment: true,
+          message: 'pay'
+        })
+        .expect(201)
+        .then(done);
     })
 
 
