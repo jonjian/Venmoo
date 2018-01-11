@@ -3,6 +3,7 @@ import React from 'react';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import axios from 'axios';
 =======
 import axios from 'axios'
@@ -16,6 +17,9 @@ import axios from 'axios'
 =======
 import axios from 'axios';
 >>>>>>> Adds axios POST request
+=======
+import axios from 'axios';
+>>>>>>> e2e9c0821155a3f28647b98cba29e9247ca673d2
 
 class Form extends React.Component {
   constructor(props) {
@@ -70,6 +74,7 @@ class Form extends React.Component {
     event.preventDefault();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     var url = this.state.isPayment ? '/payment' : '/request';
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -82,12 +87,16 @@ class Form extends React.Component {
 =======
     var url = this.state.isPayment ? '/payment' : '/request';
 >>>>>>> Adds axios POST request
+=======
+    var url = this.state.isPayment ? '/payment' : '/request';
+>>>>>>> e2e9c0821155a3f28647b98cba29e9247ca673d2
     axios.post(url, {
       username: this.state.otherUser,
       amount: this.state.amount,
       isPayment: this.state.isPayment,
       message: this.state.message
     })
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -101,10 +110,15 @@ class Form extends React.Component {
 =======
       console.log(response)
 >>>>>>> More test fixing
+=======
+    .then((response) => {
+      console.log(response)
+>>>>>>> e2e9c0821155a3f28647b98cba29e9247ca673d2
     })
     .catch((error) => {
       console.log(error);
     });
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -123,6 +137,8 @@ class Form extends React.Component {
 >>>>>>> More clarity
 =======
 >>>>>>> Adds axios POST request
+=======
+>>>>>>> e2e9c0821155a3f28647b98cba29e9247ca673d2
   }
 
   render() {
