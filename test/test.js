@@ -12,7 +12,7 @@ import ProfilePage from '../client/src/components/ProfilePage.jsx';
 import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
 
-console.log(process.env.DATABASE_URL);
+// console.log(process.env.DATABASE_URL);
 
 configure({ adapter: new Adapter() });
 
@@ -36,19 +36,34 @@ describe('server', () => {
     })
   });
 
-  describe('POST /payments', () => {
-    it('should 201 when making post request with data', function(done) {
-      request
-        .post('/payments', {
-          username: 'yo',
-          amount: '30',
-          isPayment: true,
-          message: 'hm'
+  describe('POST /payments and /request', () => {
+    it('should 201 when posting to /payment', function(done) {
+    request
+      .post('/payment', {username: 'test',
+        amount: '30',
+        isPayment: true,
+        message: 'This is a test!'})
+      .expect('Success!')
+      .expect(201, done)
+    });
+
+    it('should 201 when posting to /request', function(done) {
+    request
+      .post('/request', {username: 'test',
+        amount: '30',
+        isPayment: false,
+        message: 'This is a test!'})
+      .expect('Success!')
+      .expect(201, done)
+    });
+
+    xit('should 404 when posting to /payment when invalid params', function(done) {
+    request
+      .post('/request', {username: 'test',
+        amount: '30',
         })
-        .expect(201, done)
-
-    })
-
+      .expect(404, done)
+    });
 
   })
 
