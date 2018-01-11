@@ -1,33 +1,10 @@
 const { expect } = require('chai');
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
-<<<<<<< HEAD
 
-=======
->>>>>>> Clears up previous merge conflicts in test document
-const supertest = require('supertest');
-<<<<<<< HEAD
-const request = supertest.agent(server);
-
-=======
 const supertest = require('supertest');
 const request = supertest.agent(server);
-=======
-const request = supertest.agent(server);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Clear conflict in test
 
-=======
->>>>>>> Begins tests
-const { expect } = require('chai');
-const server = require('./../server/index.js');
-const db = require('./../database/index.js');
->>>>>>> Clears up previous merge conflicts in test document
-=======
->>>>>>> Adjusts tests
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';
@@ -59,8 +36,6 @@ describe('server', () => {
     })
   });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   describe('POST /payments and /request', () => {
     it('should 201 when posting to /payment', function(done) {
     request
@@ -89,25 +64,6 @@ describe('server', () => {
         })
       .expect(404, done)
     });
-=======
-  describe('POST /payments', () => {
-    it('should return an object with response data saying success', function(done) {
-=======
-  describe('POST /payment', () => {
-    it('should 201 for success connection', function(done) {
->>>>>>> More test fixing
-      request
-        .post('/payment', {
-          username: 'test',
-          amount: '20',
-          isPayment: true,
-          message: 'pay'
-        })
-        .expect(201)
-        .then(done);
-    })
-
->>>>>>> More clarity
 
   })
 
