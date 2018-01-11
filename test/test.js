@@ -42,12 +42,12 @@ describe('Database', function() {
       let queryResult = db.getTransactionHistory('annie');
       expect(queryResult instanceof Promise).to.equal(true);
     });
-    it('should resolve to an object', function() {
+    xit('should resolve to an object', function() {
       return db.getTransactionHistory('annie').then((res) => {
         expect(res).to.be.an('object');
       });
     });
-    it('should have amount, status, type, timestamp, and description data', function() {
+    xit('should have amount, status, type, timestamp, and description data', function() {
       return db.getTransactionHistory('annie').then((res => {
         let dataEntry = res.rows[0];
         expect(dataEntry.hasOwnProperty('amount')).to.equal(true);
