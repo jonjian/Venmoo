@@ -52,6 +52,7 @@ app.get('/user/:id', (req, res) => {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 <<<<<<< HEAD
@@ -62,6 +63,8 @@ app.get('/user/:id', (req, res) => {
 
 
 =======
+=======
+>>>>>>> Cleared server side
 // app.get('/db', (request, response) => {
 //   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 //     client.query('SELECT * FROM test_table', (err, result) => {
@@ -76,10 +79,15 @@ app.get('/user/:id', (req, res) => {
 //   });
 // });
 >>>>>>> Just added spaces
+<<<<<<< HEAD
 >>>>>>> Merged conflict in server
 
 
 
+=======
+=======
+>>>>>>> updates server indexjs to resolve conflicts
+>>>>>>> Cleared server side
 
 =======
 =======
