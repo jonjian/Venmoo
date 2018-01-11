@@ -1,45 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-const { expect } = require('chai');
-const server = require('./../server/index.js').app;
-const db = require('./../database/index.js');
-<<<<<<< HEAD
-const supertest = require('supertest');
-
-const request = supertest.agent(server);
-=======
-=======
-const ReactTestUtils = require('react-dom/test-utils')
-const expect = require('chai').expect;
-const server = require('./../server/index.js');
-const React = require('react');
-const Form = require('../client/src/components/Form.jsx');
-// console.log(ReactTestUtils)
-console.log(React.createElement);
-describe('form', function() {
-  var app;
-
-  beforeEach(function () {
-
-    ReactTestUtils.renderIntoDocument(React.createElement(Form));
-  });
-
-  it('should be a stateful class component', function () {
-    expect(true).to.be.true;
-    // expect(React.Component.isPrototypeOf(Form)).to.be.true;
-  });
-
-});
->>>>>>> Uses dummy test to configure testing frameworks
-<<<<<<< HEAD
->>>>>>> test package and bundle
-=======
-=======
 const { expect } = require('chai');
 const server = require('./../server/index.js');
 const db = require('./../database/index.js');
->>>>>>> Something is happening
->>>>>>> revisiting commit
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -48,31 +9,15 @@ import ProfilePage from '../client/src/components/ProfilePage.jsx';
 import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
 
-console.log(process.env.DATABASE_URL);
+console.log(process.env);
 
 configure({ adapter: new Adapter() });
 
 describe('server', () => {
-  describe('GET /user/:id', () => {
-    xit('should return an object of user info when id is a user', function(done) {
-      request
-          .get('/user/1')
-          .expect(200)
-          .expect(/annie/, done) //not perfect put better than anything we got
-    })
-
-    xit('should 404 when given an invalid user id', function(done) {
-      request
-        .get('/user/999999')
-        .expect(404, done)
-
-        request
-          .get('/user/abc')
-          .expect(404, done)
-    })
+  it('Example test should pass', () => {
+    expect(1).to.not.equal(2);
   });
 });
-
 
 describe('react router login test', () => {
   it('should render profile page on login', () => {
