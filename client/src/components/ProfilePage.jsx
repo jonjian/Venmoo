@@ -5,6 +5,7 @@ import React from 'react';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Fixed profilepage merge conflict
 =======
@@ -13,7 +14,11 @@ import React from 'react';
 >>>>>>> Wrote important tests
 =======
 >>>>>>> Adjusted all merge conflicts
+=======
+>>>>>>> Updates index and profile
 
+=======
+>>>>>>> Adds css stylesheet and adds Form component
 import Form from './Form.jsx'
 import TransactionHistory from './TransactionHistory.jsx';
 
