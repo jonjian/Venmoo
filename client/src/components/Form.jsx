@@ -1,6 +1,10 @@
 import React from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import axios from 'axios';
+=======
+import axios from 'axios'
+>>>>>>> Adds post request through axios in form component
 =======
 import axios from 'axios'
 >>>>>>> Adds post request through axios in form component
@@ -58,6 +62,10 @@ class Form extends React.Component {
     event.preventDefault();
     var url = this.state.isPayment ? '/payment' : '/request';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> Adds post request through axios in form component
 =======
 
 >>>>>>> Adds post request through axios in form component
@@ -68,6 +76,7 @@ class Form extends React.Component {
       message: this.state.message
     })
 <<<<<<< HEAD
+<<<<<<< HEAD
     .then((response) => {
       console.log(response)
     })
@@ -75,11 +84,16 @@ class Form extends React.Component {
       console.log(error);
     });
 =======
+=======
+>>>>>>> Adds post request through axios in form component
       .then((response) => {
         console.log(response); 
       })
       .catch((error) => {
       });
+<<<<<<< HEAD
+>>>>>>> Adds post request through axios in form component
+=======
 >>>>>>> Adds post request through axios in form component
   }
 
