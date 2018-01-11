@@ -4,7 +4,7 @@ import TransactionHistory from './TransactionHistory.jsx';
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
+
   }
 
   // Displaying the username is propably unnecessary at the top of the profile page,
