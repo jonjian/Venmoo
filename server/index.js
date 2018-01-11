@@ -26,6 +26,7 @@ app.get('/user/:id', (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 // app.get('/db', (request, response) => {
 //   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 //     client.query('SELECT * FROM test_table', (err, result) => {
@@ -40,6 +41,8 @@ app.get('/user/:id', (req, res) => {
 //   });
 // });
 >>>>>>> Just added spaces
+=======
+>>>>>>> updates server indexjs to resolve conflicts
 
 app.get('/db', (request, response) => {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
