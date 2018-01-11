@@ -1,10 +1,10 @@
 const { expect } = require('chai');
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
+
 const supertest = require('supertest');
 
 const request = supertest.agent(server);
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';
