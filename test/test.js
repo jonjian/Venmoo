@@ -1,14 +1,14 @@
-const { expect } = require('chai');
-const server = require('./../server/index.js');
-const db = require('./../database/index.js');
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';
 import ProfilePage from '../client/src/components/ProfilePage.jsx';
 import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
-
+const { expect } = require('chai');
+const server = require('./../server/index.js');
+const db = require('./../database/index.js');
+const supertest = require('supertest');
+const request = supertest.agent(server);
 console.log(process.env);
 
 configure({ adapter: new Adapter() });
