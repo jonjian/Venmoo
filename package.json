@@ -10,7 +10,14 @@
   "scripts": {
     "start": "webpack -d --watch",
     "server": "nodemon --inspect ./server/index.js",
+<<<<<<< HEAD
     "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
+=======
+
+    "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
+    "lint": "./node_modules/.bin/eslint .",
+    "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
+>>>>>>> Clears package json
     "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
