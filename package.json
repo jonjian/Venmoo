@@ -10,9 +10,6 @@
   "scripts": {
     "start": "webpack -d --watch",
     "server": "nodemon --inspect ./server/index.js",
-
-    "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
-    "lint": "./node_modules/.bin/eslint .",
     "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
     "lint": "./node_modules/.bin/eslint ."
   },
