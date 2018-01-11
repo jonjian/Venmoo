@@ -18,8 +18,7 @@ app.post('/payment', (req, res) => {
   res.send('Success!')
 });
 
-<<<<<<< HEAD
-=======
+
 app.post('/payment', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
   console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
@@ -32,24 +31,6 @@ app.post('/request', (req, res) => {
   res.statusCode = 201;
   res.send('Success!');
 });
-
-
-
-app.post('/payment', (req, res) => {
-  let {username, amount, isPayment, message} = req.body;
-  console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
-  res.statusCode = 201;
-  res.send('Success!')
-});
-
->>>>>>> e2e9c0821155a3f28647b98cba29e9247ca673d2
-app.post('/request', (req, res) => {
-  let {username, amount, isPayment, message} = req.body;
-  res.statusCode = 201;
-  res.send('Success!');
-});
-
-
 
 
 
