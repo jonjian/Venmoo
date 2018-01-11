@@ -16,12 +16,25 @@ app.post('/payment', (req, res) => {
   res.send('Success!')
 });
 
+<<<<<<< HEAD
+=======
+app.post('/payment', (req, res) => {
+  let {username, amount, isPayment, message} = req.body;
+  console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
+  res.statusCode = 201;
+  res.send('Success!')
+});
+
+>>>>>>> Adds listeners for post request on server index js
 app.post('/request', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
   res.statusCode = 201;
   res.send('Success!');
 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> Adds listeners for post request on server index js
 
 
 <<<<<<< HEAD
