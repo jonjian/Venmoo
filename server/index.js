@@ -9,11 +9,6 @@ const app = express();
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
-
-
-
-
-
 app.get('/user/:id', (req, res) => {
   const { id } = req.params;
   if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
@@ -42,10 +37,32 @@ app.get('/db', (request, response) => {
 });
 
 
+app.get('/username/:name', (req, res) => {
+  const { name } = req.params;
+  const responseData = {};
+
+  db.getUserByName(name)
+    .then((userData) => {
+      checkDatabaseResponse(userData, res);
+      responseData.user = userData.rows[0];
+      db.getTransactionHistory(name)
+        .then((transactionData) => {
+          checkDatabaseResponse(transactionData, res);
+          responseData.transactions = transactionData.rows;
+          res.send(200, responseData);
+        })
+        .catch(err => console.error(err));
+    })
+    .catch(err => console.error(err));
+});
+
 if (!module.parent) {
   app.listen(PORT);
   console.log(`Listening on ${PORT}`);
 }
 
+const checkDatabaseResponse = function (data, res) {
+  if (data.length === 0 || data.rows.length === 0) res.status(404);
+};
 
 module.exports.app = app;
