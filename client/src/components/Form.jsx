@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD
 import axios from 'axios';
+=======
+import axios from 'axios'
+>>>>>>> Adds post request through axios in form component
 
 class Form extends React.Component {
   constructor(props) {
@@ -53,18 +57,30 @@ class Form extends React.Component {
   formSubmitHandler(event) {
     event.preventDefault();
     var url = this.state.isPayment ? '/payment' : '/request';
+<<<<<<< HEAD
+=======
+
+>>>>>>> Adds post request through axios in form component
     axios.post(url, {
       username: this.state.otherUser,
       amount: this.state.amount,
       isPayment: this.state.isPayment,
       message: this.state.message
     })
+<<<<<<< HEAD
     .then((response) => {
       console.log(response)
     })
     .catch((error) => {
       console.log(error);
     });
+=======
+      .then((response) => {
+        console.log(response); 
+      })
+      .catch((error) => {
+      });
+>>>>>>> Adds post request through axios in form component
   }
 
   render() {
