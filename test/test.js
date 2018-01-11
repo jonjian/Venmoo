@@ -1,10 +1,19 @@
 const { expect } = require('chai');
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
+<<<<<<< HEAD
 
 const supertest = require('supertest');
 const request = supertest.agent(server);
 
+=======
+const supertest = require('supertest');
+const request = supertest.agent(server);
+
+const { expect } = require('chai');
+const server = require('./../server/index.js');
+const db = require('./../database/index.js');
+>>>>>>> Clears up previous merge conflicts in test document
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';
