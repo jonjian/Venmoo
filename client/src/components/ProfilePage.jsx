@@ -1,6 +1,10 @@
 import React from 'react';
+<<<<<<< HEAD
 import TransactionHistory from './TransactionHistory.jsx';
 
+=======
+import Form from './Form.jsx'
+>>>>>>> Creates the form component with fields to, amount, and message
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
@@ -12,8 +16,13 @@ class ProfilePage extends React.Component {
   render() {
     return (
       <div>
+<<<<<<< HEAD
         PROFILE PAGE
         <TransactionHistory transactionHist={this.props.transactionHist}/>
+=======
+      PROFILE PAGE
+      <Form />
+>>>>>>> Creates the form component with fields to, amount, and message
       </div>
     );
   }
