@@ -45,11 +45,18 @@ class Form extends React.Component {
           <br />
           <br />
           <label> Amount: </label>
-          <input type="textarea" />
+          <input type="textarea" label="$" />
           <br />
           <br />
           <label> Message: </label>
           <input type="textarea" />
+          <br />
+          <br />
+          <br />
+          {this.state.isPayment ?
+          (<div> <button id="decisionBtn" type="submit"> Pay </button> </div>)
+          :
+          (<div> <button id="decisionBtn" type="submit"> Request </button> </div>)}
         </form>
       </div>
   )}
