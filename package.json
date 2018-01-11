@@ -25,7 +25,12 @@
   },
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "babel-plugin-react-transform": "^3.0.0",
+=======
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+>>>>>>> Npm installs body parser and axios to handle http requesting
 =======
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
