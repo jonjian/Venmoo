@@ -1,19 +1,10 @@
 const { expect } = require('chai');
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
-<<<<<<< HEAD
 
 const supertest = require('supertest');
 const request = supertest.agent(server);
 
-=======
-const supertest = require('supertest');
-const request = supertest.agent(server);
-
-const { expect } = require('chai');
-const server = require('./../server/index.js');
-const db = require('./../database/index.js');
->>>>>>> 31853f74316a2536dc7cc5a2203426426a077e7a
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';

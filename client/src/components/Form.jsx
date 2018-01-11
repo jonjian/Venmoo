@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
 import axios from 'axios';
-=======
-import axios from 'axios'
->>>>>>> 31853f74316a2536dc7cc5a2203426426a077e7a
 
 class Form extends React.Component {
   constructor(props) {
@@ -57,30 +53,18 @@ class Form extends React.Component {
   formSubmitHandler(event) {
     event.preventDefault();
     var url = this.state.isPayment ? '/payment' : '/request';
-<<<<<<< HEAD
-=======
-
->>>>>>> 31853f74316a2536dc7cc5a2203426426a077e7a
     axios.post(url, {
       username: this.state.otherUser,
       amount: this.state.amount,
       isPayment: this.state.isPayment,
       message: this.state.message
     })
-<<<<<<< HEAD
     .then((response) => {
       console.log(response)
     })
     .catch((error) => {
       console.log(error);
     });
-=======
-      .then((response) => {
-        console.log(response); 
-      })
-      .catch((error) => {
-      });
->>>>>>> 31853f74316a2536dc7cc5a2203426426a077e7a
   }
 
   render() {

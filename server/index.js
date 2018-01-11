@@ -26,7 +26,6 @@ app.post('/request', (req, res) => {
 
 
 
-<<<<<<< HEAD
 app.post('/payment', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
   console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
@@ -44,8 +43,6 @@ app.post('/request', (req, res) => {
 
 
 
-=======
->>>>>>> 31853f74316a2536dc7cc5a2203426426a077e7a
 app.get('/user/:id', (req, res) => {
   const { id } = req.params;
   if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
