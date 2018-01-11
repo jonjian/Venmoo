@@ -1,8 +1,14 @@
+div#form {
+  border: 1px solid black;
+  width: 400px;
+}
+
 .tab {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
     width: 400px;
+    align: center; 
 }
 
 button#decisionBtn {
