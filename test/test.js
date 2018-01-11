@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const { expect } = require('chai');
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
@@ -30,7 +31,15 @@ describe('form', function() {
 
 });
 >>>>>>> Uses dummy test to configure testing frameworks
+<<<<<<< HEAD
 >>>>>>> test package and bundle
+=======
+=======
+const { expect } = require('chai');
+const server = require('./../server/index.js');
+const db = require('./../database/index.js');
+>>>>>>> Something is happening
+>>>>>>> revisiting commit
 
 import React from 'react'
 import ReactDOM from 'react-dom'
