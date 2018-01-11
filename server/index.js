@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser')
 require('dotenv').config();
 const db = require('../database');
 
@@ -7,10 +8,21 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(bodyParser.json())
 
 
+app.post('/payment', (req, res) => {
+  let {username, amount, isPayment, message} = req.body;
+  console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
+  res.statusCode = 201;
+  res.send('Success!')
+});
 
-
+app.post('/request', (req, res) => {
+  let {username, amount, isPayment, message} = req.body;
+  res.statusCode = 201;
+  res.send('Success!');
+});
 
 
 
