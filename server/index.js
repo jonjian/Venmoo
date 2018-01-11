@@ -5,7 +5,7 @@ require('dotenv').config();
 const db = require('../database');
 const expressRenderJsx = require('express-render-jsx');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -88,6 +88,19 @@ app.get('/profilepage/username/:name', (req, res) => {
     })
     .catch(err => console.error(err));
 });
+
+app.post('/transaction/accept/:id-:status', (req, res) => {
+  const { id, status } = req.params;
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid transaction id, should be a postive integer');
+  } else if (status !== 'approved' && status !== 'declined') {
+    res.status(404).send('invalid status parameter, should be "approved" or "declined"');
+  } else {
+    db.transactionAccept(id, status, (data) => { console.log(data); });
+    res.send('hello');
+  }
+});
+
 
 if (!module.parent) {
   app.listen(PORT);
