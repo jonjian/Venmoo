@@ -52,7 +52,7 @@ app.get('/user/:id', (req, res) => {
     db.getUser(id, (data) => {
       if (data.length === 0) {
         res.status(404);
-        res.end();
+        res.send('no user in database with matching id');
       } else {
         res.send(JSON.stringify(data[0]));
       }
