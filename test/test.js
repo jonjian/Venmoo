@@ -15,9 +15,12 @@ const request = supertest.agent(server);
 =======
 const request = supertest.agent(server);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Clear conflict in test
 
+=======
+>>>>>>> Begins tests
 const { expect } = require('chai');
 const server = require('./../server/index.js');
 const db = require('./../database/index.js');
@@ -53,6 +56,7 @@ describe('server', () => {
     })
   });
 
+<<<<<<< HEAD
   describe('POST /payments and /request', () => {
     it('should 201 when posting to /payment', function(done) {
     request
@@ -81,6 +85,15 @@ describe('server', () => {
         })
       .expect(404, done)
     });
+=======
+  describe('POST /payments', () => {
+    it('should return an object with response data saying success', function(done) {
+      request
+        .post('/payments', {})
+
+    })
+
+>>>>>>> More clarity
 
   })
 
