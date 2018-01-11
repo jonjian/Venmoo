@@ -18,7 +18,11 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Just added spaces
+=======
+
+>>>>>>> updates server indexjs to resolve conflicts
 app.get('/user/:id', (req, res) => {
   const { id } = req.params;
   if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
@@ -34,6 +38,7 @@ app.get('/user/:id', (req, res) => {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 
 
 
@@ -62,6 +67,8 @@ app.get('/user/:id', (req, res) => {
 // });
 >>>>>>> Just added spaces
 
+=======
+>>>>>>> updates server indexjs to resolve conflicts
 app.get('/db', (request, response) => {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     client.query('SELECT * FROM test_table', (err, result) => {
@@ -78,6 +85,7 @@ app.get('/db', (request, response) => {
 
 const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 
+<<<<<<< HEAD
 app.get('/profilepage', reactRoute);
 
 app.get('/login', reactRoute);
@@ -103,6 +111,8 @@ app.get('/username/:name', (req, res) => {
     .catch(err => console.error(err));
 });
 
+=======
+>>>>>>> updates server indexjs to resolve conflicts
 if (!module.parent) {
   app.listen(PORT);
   console.log(`Listening on ${PORT}`);
