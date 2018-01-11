@@ -10,21 +10,11 @@
   "scripts": {
     "start": "webpack -d --watch",
     "server": "nodemon --inspect ./server/index.js",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+    "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
+    "lint": "./node_modules/.bin/eslint .",
     "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
     "lint": "./node_modules/.bin/eslint ."
-=======
-    "test": "mocha --compilers js:babel-register ./test/test.js --exit"
->>>>>>> Uses dummy test to configure testing frameworks
-=======
-    "test": "mocha ./test/test.js --exit"
->>>>>>> Tries out a new test script but then returns to normal
-=======
-    "test": "jest && mocha ./test/test.js --compilers js:babel-core/register --exit",
-    "lint": "./node_modules/.bin/eslint ."
->>>>>>> Something is happening
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta.3",
