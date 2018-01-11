@@ -7,6 +7,7 @@ import { users, transactions } from './../../../database/dummy-data.js';
 import Login from './Login.jsx';
 import Main from './Main.jsx';
 import ProfilePage from './ProfilePage.jsx';
+import VenmooTitle from './VenmooTitle.jsx';
 
 
 class App extends React.Component {
@@ -22,7 +23,7 @@ class App extends React.Component {
     return (
       <div>
         <VenmooTitle />
-        <Main {this.state.user} transactionHist={this.state.transactionHist}/>
+        <Main user={this.state.user} transactionHist={this.state.transactionHist}/>
       </div>
     );
   }

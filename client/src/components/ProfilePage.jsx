@@ -12,7 +12,6 @@ class ProfilePage extends React.Component {
   render() {
     return (
       <div>
-        {this.props.user.username} <br/>
         PROFILE PAGE
         <TransactionHistory transactionHist={this.props.transactionHist}/>
       </div>
