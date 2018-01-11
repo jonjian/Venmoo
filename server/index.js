@@ -54,6 +54,20 @@ app.get('/user/:id', (req, res) => {
   }
 });
 
+// app.get('/db', (request, response) => {
+//   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+//     client.query('SELECT * FROM test_table', (err, result) => {
+//       done();
+//       if (err)
+//        { console.error(err); response.send("Error " + err); }
+//       else {
+//         response.statusCode = 200;
+//         response.send(JSON.stringify({results: result.rows}));
+//        };
+//     });
+//   });
+// });
+>>>>>>> Just added spaces
 
 
 app.get('/db', (request, response) => {
