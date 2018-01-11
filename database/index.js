@@ -81,3 +81,5 @@ module.exports = {
   getUserByName,
   createTransaction
 };
+
+getUser(222, console.log)

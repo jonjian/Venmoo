@@ -50,8 +50,12 @@ app.get('/user/:id', (req, res) => {
     res.status(404).send('invalid user id, should be a postive integer');
   } else {
     db.getUser(id, (data) => {
-      if (data.length === 0) res.status(404);
-      res.send(JSON.stringify(data[0]));
+      if (data.length === 0) {
+        res.status(404);
+        res.end();
+      } else {
+        res.send(JSON.stringify(data[0]));
+      }
     });
   }
 });
