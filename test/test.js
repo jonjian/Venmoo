@@ -37,7 +37,7 @@ describe('server', () => {
   });
 
   describe('POST /payments and /request', () => {
-    it('should 201 when posting to /payment', function(done) {
+    xit('should 201 when posting to /payment', function(done) {
     request
       .post('/payment', {username: 'test',
         amount: '30',
@@ -47,7 +47,7 @@ describe('server', () => {
       .expect(201, done)
     });
 
-    it('should 201 when posting to /request', function(done) {
+    xit('should 201 when posting to /request', function(done) {
     request
       .post('/request', {username: 'test',
         amount: '30',
