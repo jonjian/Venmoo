@@ -29,7 +29,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="appbody">
         <VenmooTitle />
         <Main user={this.state.user} transactionHist={this.state.transactionHist} renderUser={this.renderUser}/>
       </div>
