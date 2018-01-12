@@ -13,11 +13,10 @@ app.use(bodyParser.json())
 
 app.post('/payment', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
-  console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
+  // console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
   res.statusCode = 201;
   res.send('Success!')
 });
-
 
 
 app.post('/request', (req, res) => {
@@ -27,17 +26,14 @@ app.post('/request', (req, res) => {
 });
 
 
-
 app.get('/user/:id', (req, res) => {
   const { id } = req.params;
   if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
     res.status(404).send('invalid user id, should be a postive integer');
   } else {
     db.getUser(id, (data) => {
-      console.log(data);
       if (data.length === 0) res.status(404);
-      // res.send(JSON.stringify(data[0]));
-      res.json(data[0]);
+      res.send(JSON.stringify(data[0]));
     });
   }
 });
