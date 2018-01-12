@@ -12,7 +12,7 @@ import ProfilePage from '../client/src/components/ProfilePage.jsx';
 import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
 
-// console.log(process.env.DATABASE_URL);
+console.log(process.env.DATABASE_URL);
 
 configure({ adapter: new Adapter() });
 
@@ -38,14 +38,14 @@ describe('server', () => {
 
   describe('POST /payments and /request', () => {
     it('should 201 when posting to /payment', function(done) {
-    request
-      .post('/payment', {username: 'test',
-        amount: '30',
-        isPayment: true,
-        message: 'This is a test!'})
-      .expect('Success!')
-      .expect(201, done)
-    });
+    // request
+    //   .post('/payment', {username: 'test',
+    //     amount: '30',
+    //     isPayment: true,
+    //     message: 'This is a test!'})
+    //   .expect('Success!')
+    //   .expect(201, done)
+    // });
 
     it('should 201 when posting to /request', function(done) {
     request
