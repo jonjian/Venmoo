@@ -55,7 +55,11 @@ const getUserByName = (name) => {
   return client.query(queryString);
 };
 
+<<<<<<< HEAD
 
+=======
+const
+>>>>>>> Committed a comment
 
 const updateBalance = (isPayment) => {
   var operation = isPayment ? '+' : '-';
