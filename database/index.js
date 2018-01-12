@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 client.connect();
-
+//check
 const getTransactionHistory = function (userName) {
   const queryString = `
   SELECT
@@ -55,7 +55,7 @@ const getUserByName = (name) => {
   return client.query(queryString);
 };
 
-const 
+const
 
 const updateBalance = (isPayment) => {
   var operation = isPayment ? '+' : '-';
