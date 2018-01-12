@@ -9,7 +9,9 @@ import SignUp from './SignUp.jsx';
 class Main extends React.Component {
   constructor(props) {
     super(props);
+
     this.generateProfilePage = this.generateProfilePage.bind(this);
+    this.generateHomePage = this.generateHomePage.bind(this);
   }
 
   generateProfilePage() {
@@ -21,12 +23,20 @@ class Main extends React.Component {
     );
   }
 
+  generateHomePage() {
+    return (
+      <Login
+        renderUser={this.props.renderUser}
+      />
+    );
+  }
+
   render() {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={Login} />
-          <Route path="/profilepage" render={this.generateProfilePage} />
+          <Route exact path="/" render={this.generateHomePage} />
+          <Route path="/profilepage/username/:username" render={this.generateProfilePage} />
           <Route path="/signup" component={SignUp} />
         </Switch>
       </div>

@@ -64,8 +64,9 @@ app.get('/login', reactRoute);
 
 app.get('/signup', reactRoute);
 
-app.get('/username/:name', (req, res) => {
+app.get('/profilepage/username/:name', (req, res) => {
   const { name } = req.params;
+  console.log(name);
   const responseData = {};
 
   db.getUserByName(name)
@@ -76,7 +77,7 @@ app.get('/username/:name', (req, res) => {
         .then((transactionData) => {
           checkDatabaseResponse(transactionData, res);
           responseData.transactions = transactionData.rows;
-          res.send(200, responseData);
+          res.json(responseData);
         })
         .catch(err => console.error(err));
     })
