@@ -24,7 +24,7 @@ class ProfilePage extends React.Component {
               <h3>{`${this.props.user.balance}`}</h3>
             </div>
         </div>
-        <Form />
+        <Form user={this.props.user} />
         <div> Transaction History </div>
         <div className="scrollingTransactions">
         <TransactionHistory transactionHist={this.props.transactionHist} user={this.props.user}/>

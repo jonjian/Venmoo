@@ -54,9 +54,9 @@ class Form extends React.Component {
   formSubmitHandler(event) {
     event.preventDefault();
     var time = new Date();
-    
     var url = this.state.isPayment ? '/payment' : '/request';
     axios.post(url, {
+      senderObj: this.props.user, 
       username: this.state.otherUser,
       amount: this.state.amount,
       isPayment: this.state.isPayment,

@@ -12,13 +12,16 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.json())
 
 app.post('/payment', (req, res) => {
-  let {username, amount, isPayment, message} = req.body;
+  let {senderObj, username, amount, isPayment, message} = req.body;
+  console.log('SENDER: ', sender);
   db.getUserByName(username)
     .then((data) => {
       let {id, name} = data.rows[0];
+      db.createTransaction(senderObj.id, id, amount, isPayment)
+
     })
     .catch(() => {
-      console.error(); 
+      console.error();
     })
   // console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
   res.statusCode = 201;
