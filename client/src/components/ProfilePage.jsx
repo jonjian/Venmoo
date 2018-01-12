@@ -13,7 +13,11 @@ class ProfilePage extends React.Component {
       <div>
         PROFILE PAGE
         <Form />
-        <TransactionHistory transactionHist={this.props.transactionHist}/>
+        <TransactionHistory
+          transactionHist={this.props.transactionHist} 
+          user={this.props.user}
+        />
+
       </div>
     );
   }
