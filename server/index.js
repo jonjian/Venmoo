@@ -20,10 +20,6 @@ app.post('/payment', (req, res) => {
 
 // if user is in database
 // find user's balance, and update accordingly
-<<<<<<< HEAD
-=======
-
->>>>>>> Updated database functions
 
 app.post('/request', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
@@ -44,7 +40,7 @@ app.get('/user/:id', (req, res) => {
   }
 });
 
-
+//comment to make change
 const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 
 app.get('/profilepage', reactRoute);
@@ -55,7 +51,7 @@ app.get('/signup', reactRoute);
 
 app.get('/profilepage/username/:name', (req, res) => {
   const { name } = req.params;
-  
+
   const responseData = {};
 
   db.getUserByName(name)
