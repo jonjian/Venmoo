@@ -56,19 +56,24 @@ const getUserByName = (name) => {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 const
 >>>>>>> Committed a comment
+=======
+const createTransaction = () => {
+  
+}
+>>>>>>> Uses getUserByName in server post to payments endpoint
 
-const updateBalance = (isPayment) => {
-  var operation = isPayment ? '+' : '-';
+const updateBalanceQuery = (isPayment, amount) => {
+  let operation = isPayment ? '+' : '-';
   const updateReceiver = `UPDATE users
     SET balance = balance ${operation} ${amount.slice(1)}::float8::numeric::money
     WHERE id = ${receiver_id};
   `;
 };
-
 
 
 module.exports = {

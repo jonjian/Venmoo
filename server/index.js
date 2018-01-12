@@ -13,9 +13,18 @@ app.use(bodyParser.json())
 
 app.post('/payment', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
+<<<<<<< HEAD
   // console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
+=======
+  db.getUserByName(username)
+    .then((data)=>{
+      let { id, name, balance } = data.rows[0];
+      console.log(id, name, balance);
+    })
+    .catch(() => { console.error(); })
+>>>>>>> Uses getUserByName in server post to payments endpoint
   res.statusCode = 201;
-  res.send('Success!')
+  res.send('Success!'); 
 });
 
 // if user is in database
@@ -30,6 +39,12 @@ app.post('/payment', (req, res) => {
 
 app.post('/request', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
+  db.getUserByName(username)
+    .then((data)=>{
+      let {id, name} = data.rows[0];
+    })
+    .catch((error) => {console.error()})
+
   res.statusCode = 201;
   res.send('Success!');
 });
