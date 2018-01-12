@@ -20,7 +20,7 @@ const getTransactionHistory = function (userName) {
     tab.description,
     tab.sender_name,
     users.name AS receiver_name
-  FROM 
+  FROM
     (SELECT
       transactions.id AS transaction_id,
       transactions.amount,
@@ -30,9 +30,9 @@ const getTransactionHistory = function (userName) {
       transactions.resolved_timestamp,
       transactions.description,
       transactions.receiver_id,
-      users.name AS sender_name 
+      users.name AS sender_name
     FROM transactions, users
-    WHERE transactions.sender_id = users.id) 
+    WHERE transactions.sender_id = users.id)
     AS tab, users
   WHERE tab.receiver_id=users.id`;
 
@@ -53,6 +53,9 @@ const getUserByName = (name) => {
   const queryString = `SELECT * FROM users WHERE name = '${name}'`;
   return client.query(queryString);
 };
+
+
+
 
 module.exports = {
   getUser,

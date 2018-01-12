@@ -3,8 +3,8 @@ const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
 
 const supertest = require('supertest');
-
 const request = supertest.agent(server);
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { configure, shallow, mount, render } from 'enzyme';
@@ -25,7 +25,7 @@ describe('server', () => {
           .expect(/annie/, done) //not perfect put better than anything we got
     })
 
-    xit('should 404 when given an invalid user id', function(done) {
+    it('should 404 when given an invalid user id', function(done) {
       request
         .get('/user/999999')
         .expect(404, done)
@@ -35,6 +35,30 @@ describe('server', () => {
           .expect(404, done)
     })
   });
+
+  describe('POST /payments and /request', () => {
+    it('should 201 when posting to /payment', function(done) {
+    request
+      .post('/payment', {username: 'test',
+        amount: '30',
+        isPayment: true,
+        message: 'This is a test!'})
+      .expect('Success!')
+      .expect(201, done)
+    });
+
+    it('should 201 when posting to /request', function(done) {
+    request
+      .post('/request', {username: 'test',
+        amount: '30',
+        isPayment: false,
+        message: 'This is a test!'})
+      .expect('Success!')
+      .expect(201, done)
+    });
+
+  })
+
 });
 
 
@@ -75,7 +99,8 @@ describe('Database', function() {
         expect(dataEntry.hasOwnProperty('created_timestamp')).to.equal(true);
         expect(dataEntry.hasOwnProperty('resolved_timestamp')).to.equal(true);
         expect(dataEntry.hasOwnProperty('description')).to.equal(true);
-      }))
+
+      }).then(done))
     })
   });
 });
