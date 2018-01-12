@@ -21,7 +21,10 @@ app.post('/payment', (req, res) => {
 // if user is in database
 // find user's balance, and update accordingly
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Updated database functions
 
 >>>>>>> Updated database functions
 
