@@ -13,8 +13,6 @@ import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
 import { response } from './../database/dummy-data.js';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 4000;
-
 configure({ adapter: new Adapter() });
 
 describe('server', () => {
