@@ -37,7 +37,7 @@ describe('server', () => {
   });
 
   describe('POST /payments and /request', () => {
-    it('should 201 when posting to /payment', function(done) {
+    // it('should 201 when posting to /payment', function(done) {
     // request
     //   .post('/payment', {username: 'test',
     //     amount: '30',
