@@ -20,6 +20,10 @@ app.post('/payment', (req, res) => {
 
 // if user is in database
 // find user's balance, and update accordingly
+<<<<<<< HEAD
+=======
+
+>>>>>>> Updated database functions
 
 app.post('/request', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
