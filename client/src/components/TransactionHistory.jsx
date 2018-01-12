@@ -21,9 +21,9 @@ import TransactionEntry from './TransactionEntry.jsx';
 
 const TransactionHistory = props => (
   <div className="container">
-    Transaction History:
+
     {props.transactionHist.map(entry => {
-      return <TransactionEntry 
+      return <TransactionEntry
             transaction={entry}
             key={entry.transaction_id}
             user={props.user}/>
