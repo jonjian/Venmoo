@@ -37,15 +37,15 @@ describe('server', () => {
   });
 
   describe('POST /payments and /request', () => {
-    // it('should 201 when posting to /payment', function(done) {
-    // request
-    //   .post('/payment', {username: 'test',
-    //     amount: '30',
-    //     isPayment: true,
-    //     message: 'This is a test!'})
-    //   .expect('Success!')
-    //   .expect(201, done)
-    // });
+    it('should 201 when posting to /payment', function(done) {
+    request
+      .post('/payment', {username: 'test',
+        amount: '30',
+        isPayment: true,
+        message: 'This is a test!'})
+      .expect('Success!')
+      .expect(201, done)
+    });
 
     it('should 201 when posting to /request', function(done) {
     request
@@ -55,14 +55,6 @@ describe('server', () => {
         message: 'This is a test!'})
       .expect('Success!')
       .expect(201, done)
-    });
-
-    xit('should 404 when posting to /payment when invalid params', function(done) {
-    request
-      .post('/request', {username: 'test',
-        amount: '30',
-        })
-      .expect(404, done)
     });
 
   })
