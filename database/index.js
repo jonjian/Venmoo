@@ -57,6 +57,7 @@ const getUserByName = (name) => {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 const
@@ -66,6 +67,27 @@ const createTransaction = () => {
   
 }
 >>>>>>> Uses getUserByName in server post to payments endpoint
+=======
+const createTransaction = () => {
+  
+}
+
+const updateBalanceQuery = (isPayment, amount) => {
+  let operation = isPayment ? '+' : '-';
+  const updateReceiver = `UPDATE users
+    SET balance = balance ${operation} ${amount.slice(1)}::float8::numeric::money
+    WHERE id = ${receiver_id};
+  `;
+};
+
+const updateBalance = (isPayment) => {
+  var operation = isPayment ? '+' : '-';
+  const updateReceiver = `UPDATE users
+    SET balance = balance ${operation} ${amount.slice(1)}::float8::numeric::money
+    WHERE id = ${receiver_id};
+  `;
+};
+>>>>>>> 55b5acfd2f0ea823afe35b931c3f019b997aa6d8
 
 const updateBalanceQuery = (isPayment, amount) => {
   let operation = isPayment ? '+' : '-';
