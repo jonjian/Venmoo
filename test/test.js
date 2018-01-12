@@ -107,7 +107,8 @@ describe('Database', function() {
         expect(dataEntry.hasOwnProperty('created_timestamp')).to.equal(true);
         expect(dataEntry.hasOwnProperty('resolved_timestamp')).to.equal(true);
         expect(dataEntry.hasOwnProperty('description')).to.equal(true);
-      }))
+
+      }).then(done))
     })
   });
 });
