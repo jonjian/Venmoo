@@ -4,4 +4,5 @@ node_js:
 script: npm start & node ./server/index.js & npm run test
 env:
   global:
-  - DATABASE_URL=postgres://abc:d0ef@hi-j.compute-1.amazonaws.com:5432/dedjj9hcdfiie5
+    - DB_URL: postgres://abc:d0ef@hi-j.compute-1.amazonaws.com:5432/dedjj9hcdfiie5
+    - secure: GAuUXutlxmgHs+OTA7mkoAqQ4yP4fi3XrStrX8wmeAhvPAKY1CHTsphTo8+xAywAgaFJVhySOZpJzElRvzSGwuqwPxCR71PFfNbGO76qrsDN0h0NUuGQpW1sdR1+E5z0HpXwK+8ffHIlKP38/Ei6/Y0aiwRDsouJ7p0ffNoWDoA0kD6NbIkhFQ5/4aMRKMA9Yi/1a/pgEy1bws8nUJW1WvITVf+cOErKilBEO4PPMxYviYPxZCNBr+ORnudzISB7b6ors/dEOhhgAINX4NPQp5+jSA2Qmush0dFd2Dt/I/fhL0tLibSaStpXyx2ikoWhx1WiIc8WXWv5a9YcOB/cJqTvcxQe1tLDKF2ySzUP9XpD6Q6FgghZtj8h+yK142/BUQAWBRfF9ui5MsuHYH4vG+GX61+STWOUQActX9DMredIbuAwgiyIbPTda2qEOoYP9UAWMBX8pBJmwkzL66epdLcZ0f7jdcs8UfYKclQShAifxswIRzGeG1D947JmuSanuSQuVqKP0Kv0nemmfy6mlbrqFUr1CnsCjbGUz1X08l69UyKDbpVs60N+h/KZIJNj6bxLRiPwadGTgUPl/t4t7JojQPdDOLImkbd2DdioQqyWcCueegORr5Wd5tdhluyS8hRaQfMcGvEYfJvY0yEzLeRcOB/YIrb33b/YvVxcwW4=
