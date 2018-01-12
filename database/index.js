@@ -55,7 +55,7 @@ const getUserByName = (name) => {
   return client.query(queryString);
 };
 
-const
+
 
 const updateBalance = (isPayment) => {
   var operation = isPayment ? '+' : '-';
