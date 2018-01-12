@@ -22,3 +22,13 @@ envNames.forEach(x => console.log(process.env[x]))
 
 
 // ALEX DEBUG BLOCK END
+/*
+env:
+  global:
+  - DATABASE_URL=postgres://abc:d0ef@hi-j.compute-1.amazonaws.com:5432/dedjj9hcdfiie5
+  - TEST=postgres://abc:d0ef@hi-j.compute-1.amazonaws.com:5432/dedjj9hcdfiie5
+  - TEST_ENCODED=postgres%3A%2F%2Fabc%3Ad0ef%40hi-j.compute-1.amazonaws.com%3A5432%2Fdedjj9hcdfiie5
+  - TEST_QUOTE1='a'
+  - TEST_QUOTE2="a"
+  - TEST_BASE=hello
+  */
