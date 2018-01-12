@@ -18,7 +18,7 @@ configure({ adapter: new Adapter() });
 
 describe('server', () => {
   describe('GET /user/:id', () => {
-    xit('should return an object of user info when id is a user', function(done) {
+    it('should return an object of user info when id is a user', function(done) {
       request
           .get('/user/1')
           .expect(200)
@@ -37,7 +37,7 @@ describe('server', () => {
   });
 
   describe('POST /payments and /request', () => {
-    xit('should 201 when posting to /payment', function(done) {
+    it('should 201 when posting to /payment', function(done) {
     request
       .post('/payment', {username: 'test',
         amount: '30',
@@ -47,7 +47,7 @@ describe('server', () => {
       .expect(201, done)
     });
 
-    xit('should 201 when posting to /request', function(done) {
+    it('should 201 when posting to /request', function(done) {
     request
       .post('/request', {username: 'test',
         amount: '30',
@@ -78,10 +78,10 @@ describe("react router signup test", () => {
 
 describe('Database', function() {
   describe('getTransactionHistory', function() {
-    it('should be a function', function() {
+    xit('should be a function', function() {
       expect(db.getTransactionHistory).to.be.a('function');
     });
-    it('should return a promise', function() {
+    xit('should return a promise', function() {
       let queryResult = db.getTransactionHistory('annie');
       expect(queryResult instanceof Promise).to.equal(true);
     });
@@ -100,7 +100,7 @@ describe('Database', function() {
         expect(dataEntry.hasOwnProperty('resolved_timestamp')).to.equal(true);
         expect(dataEntry.hasOwnProperty('description')).to.equal(true);
 
-      }).then(done))
+      }))
     })
   });
 });
