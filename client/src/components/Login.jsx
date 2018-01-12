@@ -47,10 +47,11 @@ class Login extends React.Component {
       </div>
         <div>
         <Link to={`/profilepage/username/${this.state.username}`}>
-          <input type="submit" onClick={() => this.getRequest()} value="Log In" />
+          <input className="loginButton" type="submit" onClick={() => this.getRequest()} value="Log In" />
         </Link>
+        <br />
         <Link to="/signup">
-          <input type="submit" value="No Account? Sign Up Here" />
+          <input className="loginButton" type="submit" value="No Account? Sign Up Here" />
         </Link>
       </div>
       </form>

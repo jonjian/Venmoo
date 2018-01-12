@@ -27,6 +27,7 @@ class Main extends React.Component {
     return (
       <Login
         renderUser={this.props.renderUser}
+        user ={this.props.user}
       />
     );
   }
