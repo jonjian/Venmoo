@@ -18,6 +18,8 @@ app.post('/payment', (req, res) => {
   res.send('Success!')
 });
 
+// if user is in database
+// find user's balance, and update accordingly
 
 
 app.post('/request', (req, res) => {

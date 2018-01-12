@@ -55,6 +55,15 @@ const getUserByName = (name) => {
   return client.query(queryString);
 };
 
+const 
+
+const updateBalance = (isPayment) => {
+  var operation = isPayment ? '+' : '-';
+  const updateReceiver = `UPDATE users
+    SET balance = balance ${operation} ${amount.slice(1)}::float8::numeric::money
+    WHERE id = ${receiver_id};
+  `;
+};
 
 
 
