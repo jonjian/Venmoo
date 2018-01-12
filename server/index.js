@@ -62,7 +62,7 @@ app.get('/profilepage/username/:name', (req, res) => {
         .then((transactionData) => {
           checkDatabaseResponse(transactionData, res);
           responseData.transactions = transactionData.rows;
-          res.json(responseData);
+          res.json(200, responseData);
         })
         .catch(err => console.error(err));
     })
