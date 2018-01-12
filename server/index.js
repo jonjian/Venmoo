@@ -96,8 +96,7 @@ app.post('/transaction/accept/:id-:status', (req, res) => {
   } else if (status !== 'approved' && status !== 'declined') {
     res.status(404).send('invalid status parameter, should be "approved" or "declined"');
   } else {
-    db.transactionAccept(id, status, (data) => { console.log(data); });
-    res.send('hello');
+    db.transactionAccept(id, status, (data) => { res.send(data); });
   }
 });
 

@@ -1,5 +1,7 @@
 language: node_js
 node_js:
-  - 8.4.0
-
+- 8.4.0
 script: npm start & node ./server/index.js & npm run test
+env:
+  global:
+    secure: ExPOhq5MS1/PgEBWQbiAHgasu29psxIdj9tFpujnSnSKWNtXhZ6SUIZ0zrVKyxnZxrt/VXTf+GlI3juMb6kh+cTnjTu+lmv1Yfpym37K4bK/s+3vkICK42h6NRLABkOiD5ttPJLoomnsIT/YLzhyPfPDU2NUxGujBJRoTwiBGGTcVm8dgbU1yAw5a3SH/6ksvAfUE28974rFtinoBh6Qbfyvfgwl1js3DfVYcb/PSntJ3JmxWl6EO1Zji+XuN0QgU8JzWJSUe7TrtyeHjVDuTqBc9PG53h1jVKeweWViyxw1REImIHvdTD/BNJf3JStzmYJa5wnCYH7uDPOTM0xu67so6qfZ8fj/JFXeYViFA1rRqxzTecOgrngBMrcUDmfAWc6VxNp+7fQtd+tyo3MtXUvz7CNXRK/xsOACvGG+noeEJpF9KwXQxPC9J4V/k2OwE4jyRWK+VrisydOwRyLCmcksW3AktrOjNUzpI7k9c3RMEN9LrAhy3MTcPRDPSygN5/CwMpZfsrWhLep5e944oaVmT1ubjZ6toDSMH9PEoAZD+z5pBkq1Jy2hM2SwGhq+RrNolyDuq81TZpz5UCmVTMHdbRDMkYsfCQUout1gEYRz0yGlZv/gfIpJuACcvlcCWaAvdEQCXH36/H5ZYld36VVybD1V4jXyS3rk1qkeoDY=
