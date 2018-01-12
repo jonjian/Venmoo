@@ -1,6 +1,7 @@
 const { expect } = require('chai');
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
+require('dotenv').config();
 
 const supertest = require('supertest');
 const request = supertest.agent(server);
@@ -11,7 +12,33 @@ import { configure, shallow, mount, render } from 'enzyme';
 import ProfilePage from '../client/src/components/ProfilePage.jsx';
 import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
+
 import { response } from './../database/dummy-data.js';
+
+// ALEX DEBUG BLOCK START
+require('dotenv').config();
+const test = 'postgres://abc:d0ef@hi-j.compute-1.amazonaws.com:5432/dedjj9hcdfiie5'
+const testEncoded = encodeURIComponent(test)
+const testQuote2 = '"a"'
+const testQuote1 = "'a'"
+const testBase = 'hello'
+
+const  yaml = `
+env:
+  - TEST=${test}
+  - TEST_ENCODED=${testEncoded}
+  - TEST_QUOTE1=${testQuote1}
+  - TEST_QUOTE2=${testQuote2}
+  - TEST_BASE=${testBase}
+`
+
+
+const envNames =['TEST', 'TEST_ENCODED', 'TEST_QUOTE1', 'TEST_QUOTE2','TEST_BASE']
+//const envNames = ['DATABASE_URL', 'PORT']
+envNames.forEach(x => console.log(x, process.env[x]))
+
+
+// ALEX DEBUG BLOCK END
 
 configure({ adapter: new Adapter() });
 
@@ -21,7 +48,7 @@ describe('server', () => {
       request
         .get('/user/1')
         .expect(200)
-        .expect(/annie/, done); 
+        .expect(/annie/, done);
       // request
       //   .get('/user/1')
       //   .then((res) => {
@@ -100,7 +127,7 @@ describe('Client', function() {
       expect(component.find('div').toExist);
     });
   });
-  
+
   describe("react router signup test", () => {
     it("should render signup on login", () => {
       const component = shallow(<SignUp />);
