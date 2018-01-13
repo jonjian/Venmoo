@@ -18,13 +18,16 @@ app.post('/payment', (req, res) => {
     .then((data) => {
       let {id, name} = data.rows[0];
       db.createTransaction(senderObj.id, id, amount, isPayment)
-        .then(() => {
+        .then((data) => {
           db.getTransactionHistory(senderObj.name)
             .then((data) => {
               let { rows } = data;
               res.statusCode = 201;
               res.send(data);
             })
+        })
+        .then((data) => {
+          console.log('second promise')
         })
         .catch(() => { console.error() })
 
