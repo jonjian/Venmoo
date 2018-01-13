@@ -34,5 +34,6 @@ config
 
 #Vsc config
 .vscode
+.vscode/
 
 package-lock.json
