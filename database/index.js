@@ -63,16 +63,21 @@ const createTransaction = (sender_id, receiver_id, amount, isPayment, callback) 
   let timeStamp = isPayment ? 'now(), now()' : 'now(), null';
   return client.query(`INSERT INTO transactions(sender_id, receiver_id, amount, status, type, created_timestamp, resolved_timestamp)
   VALUES(${sender_id},${receiver_id},${amount},${approval},${typeOfTransaction},${timeStamp});`)
-
 };
 
 
-const updateBalance = (isPayment) => {
+const updateBalances = (sender_id, receiver_id, isPayment, amount) => {
   var operation = isPayment ? '+' : '-';
   const updateReceiver = `UPDATE users
     SET balance = balance ${operation} ${amount.slice(1)}::float8::numeric::money
     WHERE id = ${receiver_id};
   `;
+
+  const updateSender = `
+        UPDATE users
+        SET balance = balance - ${amount.slice(1)}::float8::numeric::money
+        WHERE id = ${sender_id};
+      `;
 };
 const transactionAcceptApprove = (id, cb) => {
   // change status X
@@ -159,6 +164,7 @@ const getPending = (id, cb) => {
 };
 
 module.exports = {
+  updateBalances,
   getUser,
   getTransactionHistory,
   getUserByName,
