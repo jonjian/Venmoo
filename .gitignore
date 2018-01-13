@@ -29,6 +29,9 @@ bundle.js
 node_modules/
 bower_components/
 config
+
+.vscode/
+
 .env
 
 package-lock.json
