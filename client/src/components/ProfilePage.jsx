@@ -31,17 +31,17 @@ class ProfilePage extends React.Component {
         />
         <div> Transaction History </div>
         <div className="scrollingTransactions">
-        <TransactionHistory transactionHist={this.props.transactionHist} user={this.props.user}/>
+          <TransactionHistory
+            transactionHist={this.props.transactionHist}
+            user={this.props.user} />
         </div>
-        <PendingTransactions transactionHist={this.props.transactionHist} user={this.props.user}/>
+        <div> Transaction History </div>
+        <PendingTransactions
+          transactionHist={this.props.transactionHist}
+          user={this.props.user}
+          renderUser={this.props.renderUser} />
       </div>);
   }
 }
 
 export default ProfilePage;
-
-{ /* <div>
-  PROFILE PAGE
-  <Form />
-  <TransactionHistory transactionHist={this.props.transactionHist}/>
-</div> */ }

@@ -24,22 +24,26 @@ class PendingEntry extends React.Component {
       entry: props.entry,
       isVisible: true,
     };
+
+    this.renderUser = props.renderUser;
   }
 
   hide() {
     this.setState({ isVisible: false });
   }
 
-// &npbsp; is a single space
+  // &npbsp; is a single space
   render() {
     const id = this.state.entry.transaction_id;
     const accept = () => {
       axios.post(`/transaction/accept/${id}-approved`);
       this.hide();
+      this.renderUser();
     };
     const decline = () => {
       axios.post(`/transaction/accept/${id}-declined`);
       this.hide();
+      this.renderUser();
     };
     return (
       this.state.isVisible === true ?
