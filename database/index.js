@@ -66,19 +66,43 @@ const createTransaction = (sender_id, receiver_id, amount, isPayment, callback) 
 };
 
 
-const updateBalances = (sender_id, receiver_id, isPayment, amount) => {
-  var operation = isPayment ? '+' : '-';
-  const updateReceiver = `UPDATE users
-    SET balance = balance ${operation} ${amount.slice(1)}::float8::numeric::money
-    WHERE id = ${receiver_id};
+const updateBalances = () => {
+  // change status X
+  // change resolved_timestamp X
+  // change balance of both users
+  const response = ['success'];
+
+  const selectQ = `
+    SELECT * FROM transactions order by id desc limit 1;
   `;
 
-  const updateSender = `
+  client.query(selectQ)
+    .then((res) => {
+      const { sender_id, receiver_id, amount, type } = res.rows[0];
+      const updateSender = `
         UPDATE users
         SET balance = balance - ${amount.slice(1)}::float8::numeric::money
         WHERE id = ${sender_id};
       `;
+
+      const updateReceiver = `
+        UPDATE users
+        SET balance = balance + ${amount.slice(1)}::float8::numeric::money
+        WHERE id = ${receiver_id};
+      `;
+
+      return { updateReceiver, updateSender };
+    })
+    .then(({ updateReceiver, updateSender }) => {
+      client.query(updateSender);
+      return updateReceiver;
+    })
+    .then(updateReceiver => client.query(updateReceiver))
+    // .then(cb(['FILL', 'ME', 'IN', response[0]]))
+    .catch((error) => { throw error })
 };
+
+
 const transactionAcceptApprove = (id, cb) => {
   // change status X
   // change resolved_timestamp X
