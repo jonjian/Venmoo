@@ -21,6 +21,8 @@ class App extends React.Component {
   }
 
   renderUser(user, history) {
+    console.log(user);
+    console.log(history);
     this.setState({
       user,
       transactionHist: history,

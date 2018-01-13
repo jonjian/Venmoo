@@ -69,8 +69,9 @@ describe('server', () => {
         done();
       })
       .catch(err => {
-        expect(err).to.not.exist;
+        expect(err).to.equal(undefined);
         console.error(err)
+        done();
       });
     })
       

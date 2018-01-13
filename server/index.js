@@ -10,25 +10,26 @@ const { sendUserAndTransactions, databaseRespondsCorrectly } = require('./../hel
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-
 const passport = require('passport');
-// const LocalStrategy = require('passport-local').Strategy;
 const { Strategy: LocalStrategy } = require('passport-local');
 
-passport.use(new LocalStrategy((username, password, cb) => {
-  // if query fails => cb(err)
-  // if the query succeeds and usernmae-password does not match => cb(null, false)
-  // if the query succeeds and usernmae-password matches => cb(null, user)
+app.use(passport.initialize());
+app.use(passport.session());
 
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.use(new LocalStrategy((username, password, done) => {
   db.getUserByName(username)
     .then((data) => {
-      console.log(data.rows[0]);
       if (data.rows.length && data.rows[0].password === password) {
-        return cb(null, data.rows[0]);
+        return done(null, data.rows[0]);
       }
-      return cb(null, false);
+      console.log('Invalid username/password submitted');
+      return done(null, false);
     })
-    .catch(err => cb(err));
+    .catch(err => done(err));
   
 }));
 
@@ -57,6 +58,20 @@ app.post('/payment', (req, res) => {
       console.error();
     })
 });
+
+// /passport.authenticate('local', { failureRedirect: '/login' }),
+
+app.post('/test', passport.authenticate('local', 
+  {
+    failureRedirect: '/login',
+    // successRedirect: '/profilepage',
+  }), 
+  (req, res) => {
+    console.log('request authenticated');
+    let { username } = req.body;
+    sendUserAndTransactions(username, res);
+  }
+);
 
 // if user is in database
 // find user's balance, and update accordingly
