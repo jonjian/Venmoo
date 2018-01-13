@@ -17,15 +17,21 @@ app.post('/payment', (req, res) => {
   db.getUserByName(username)
     .then((data) => {
       let {id, name} = data.rows[0];
-      db.createTransaction(senderObj.id, id, amount, isPayment, ()=>{console.log('complete!')})
+      db.createTransaction(senderObj.id, id, amount, isPayment)
+        .then(() => {
+          db.getTransactionHistory(senderObj.name)
+            .then((data) => {
+              let { rows } = data;
+              res.statusCode = 201;
+              res.send(data);
+            })
+        })
+        .catch(() => { console.error() })
 
     })
     .catch(() => {
       console.error();
     })
-  // console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
-  res.statusCode = 201;
-  res.send('Success!')
 });
 
 // if user is in database

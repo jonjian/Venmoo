@@ -59,11 +59,9 @@ const createTransaction = (sender_id, receiver_id, amount, isPayment, callback) 
   let approval = isPayment ? "'approved'" : "'pending'";
   let typeOfTransaction = isPayment ? "'payment'" : "'request'";
   let timeStamp = isPayment ? 'now(), now()' : 'now(), null';
-  client.query(`INSERT INTO transactions(sender_id, receiver_id, amount, status, type, created_timestamp, resolved_timestamp)
+  return client.query(`INSERT INTO transactions(sender_id, receiver_id, amount, status, type, created_timestamp, resolved_timestamp)
   VALUES(${sender_id},${receiver_id},${amount},${approval},${typeOfTransaction},${timeStamp});`)
-    .then((data) => {
-      callback();
-    });
+
 };
 
 

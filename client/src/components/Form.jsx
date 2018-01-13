@@ -56,7 +56,7 @@ class Form extends React.Component {
     var time = new Date();
     var url = this.state.isPayment ? '/payment' : '/request';
     axios.post(url, {
-      senderObj: this.props.user, 
+      senderObj: this.props.user,
       username: this.state.otherUser,
       amount: this.state.amount,
       isPayment: this.state.isPayment,
@@ -64,7 +64,9 @@ class Form extends React.Component {
     })
 
     .then((response) => {
-      console.log(response)
+      console.log('hello');
+      console.log(response.data.rows);
+      this.props.renderUser(this.props.user,response.data.rows);
     })
     .catch((error) => {
       console.log(error);
