@@ -66,7 +66,7 @@ class Form extends React.Component {
     .then((response) => {
       console.log('hello');
       console.log(response.data.rows);
-      this.props.renderUser(this.props.user,response.data.rows);
+      this.props.renderUser(this.props.user, response.data.rows);
     })
     .catch((error) => {
       console.log(error);
