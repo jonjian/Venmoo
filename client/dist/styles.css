@@ -186,3 +186,8 @@ body.thin::-webkit-scrollbar {
     height: 50px;
     width: 100px;
 }
+
+
+.icon {
+    fill: white; 
+}
