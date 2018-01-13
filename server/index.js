@@ -26,11 +26,11 @@ app.post('/payment', (req, res) => {
       const { id } = data.rows[0];
       db.createTransaction(senderObj.id, id, amount, isPayment)
         .then(db.updateBalances)
-        .then(() => {
-          res.statusCode = 201;
-          res.end();
-        })
         .catch(() => console.error())
+    })
+    .then(() => {
+      res.statusCode = 201;
+      res.end();
     })
     .catch(() => { console.error(); });
 });
