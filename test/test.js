@@ -80,7 +80,7 @@ describe('server', () => {
 
     it('should 201 when posting to /request', function(done) {
     request
-    .post('/payment')
+    .post('/request')
     .send({
       senderObj: {id: 2},
       username: 'annie',
