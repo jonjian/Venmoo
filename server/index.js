@@ -50,8 +50,12 @@ app.get('/user/:id', (req, res) => {
     res.status(404).send('invalid user id, should be a postive integer');
   } else {
     db.getUser(id, (data) => {
-      if (data.length === 0) res.status(404);
-      res.send(JSON.stringify(data[0]));
+      if (data.length === 0) {
+        res.status(404);
+        res.send('no user in database with matching id');
+      } else {
+        res.send(JSON.stringify(data[0]));
+      }
     });
   }
 });
@@ -78,11 +82,51 @@ app.get('/profilepage/username/:name', (req, res) => {
         .then((transactionData) => {
           checkDatabaseResponse(transactionData, res);
           responseData.transactions = transactionData.rows;
-          res.json(200, responseData);
+          res.status(200).json(responseData);
         })
         .catch(err => console.error(err));
     })
     .catch(err => console.error(err));
+});
+
+app.post('/transaction/accept/:id-:status', (req, res) => {
+  const { id, status } = req.params;
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid transaction id, should be a postive integer');
+  } else if (status !== 'approved' && status !== 'declined') {
+    res.status(404).send('invalid status parameter, should be "approved" or "declined"');
+  } else {
+    db.transactionAccept(id, status, (data) => { res.send(data); });
+  }
+});
+
+
+
+app.get('/user/:id/pending', (req, res) => {
+  const { id } = req.params;
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid user id, should be a postive integer');
+  } else {
+    db.getPending(id, (data) => {
+      res.send(JSON.stringify(data));
+    });
+  }
+});
+
+app.get('/user/:id', (req, res) => {
+  const { id } = req.params;
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid user id, should be a postive integer');
+  } else {
+    db.getUser(id, (data) => {
+      if (data.length === 0) {
+        res.status(404);
+        res.send('no user in database with matching id');
+      } else {
+        res.send(JSON.stringify(data));
+      }
+    });
+  }
 });
 
 if (!module.parent) {

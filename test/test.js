@@ -1,6 +1,7 @@
 const { expect } = require('chai');
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
+require('dotenv').config();
 
 const supertest = require('supertest');
 const request = supertest.agent(server);
@@ -11,17 +12,26 @@ import { configure, shallow, mount, render } from 'enzyme';
 import ProfilePage from '../client/src/components/ProfilePage.jsx';
 import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
+
 import { response } from './../database/dummy-data.js';
+
+// ALEX DEBUG BLOCK START
+require('dotenv').config();
+const envNames = ['DATABASE_URL', 'DBURL', 'PORT']
+envNames.forEach(x => console.log(x, process.env[x]))
+
+
+// ALEX DEBUG BLOCK END
 
 configure({ adapter: new Adapter() });
 
 describe('server', () => {
   describe('GET /user/:id', () => {
-    xit('should return an object of user info when id is a user', function(done) {
+    it('should return an object of user info when id is a user', function(done) {
       request
         .get('/user/1')
         .expect(200)
-        .expect(/annie/, done); 
+        .expect(/annie/, done);
       // request
       //   .get('/user/1')
       //   .then((res) => {
@@ -32,7 +42,7 @@ describe('server', () => {
       //   });
     });
 
-    xit('should 404 when given an invalid user id', function(done) {
+    it('should 404 when given an invalid user id', function(done) {
       request
         .get('/user/999999')
         .expect(404, done);
@@ -44,19 +54,19 @@ describe('server', () => {
   });
 
   describe('GET /profilepage/username/:name', () => {
-    xit('should 404 when given a nonexistent username', function(done) {
+    it('should 404 when given a nonexistent username', function(done) {
       request
         .get('/profilepage/username/ljsdflksd')
         .expect(404, done);
     });
 
-    xit('should return 200 when a valid username is entered', function(done) {
+    it('should return 200 when a valid username is entered', function(done) {
       request
         .get('/profilepage/username/annie')
         .expect(200, done);
     });
 
-    xit('should return an object with transactions and user objects')
+    it('should return an object with transactions and user objects')
       request
         .get('/profilepage/username/annie')
         .then((res) => {
@@ -69,7 +79,7 @@ describe('server', () => {
   });
 
   describe('POST /payments and /request', () => {
-    xit('should 201 when posting to /payment', function(done) {
+    it('should 201 when posting to /payment', function(done) {
     request
       .post('/payment', {username: 'test',
         amount: '30',
@@ -79,7 +89,7 @@ describe('server', () => {
       .expect(201, done)
     });
 
-    xit('should 201 when posting to /request', function(done) {
+    it('should 201 when posting to /request', function(done) {
     request
       .post('/request', {username: 'test',
         amount: '30',
@@ -100,7 +110,7 @@ describe('Client', function() {
       expect(component.find('div').toExist);
     });
   });
-  
+
   describe("react router signup test", () => {
     it("should render signup on login", () => {
       const component = shallow(<SignUp />);
@@ -112,19 +122,19 @@ describe('Client', function() {
 
 describe('Database', function() {
   describe('getTransactionHistory', function() {
-    xit('should be a function', function() {
+    it('should be a function', function() {
       expect(db.getTransactionHistory).to.be.a('function');
     });
-    xit('should return a promise', function() {
+    it('should return a promise', function() {
       let queryResult = db.getTransactionHistory('annie');
       expect(queryResult instanceof Promise).to.equal(true);
     });
-    xit('should resolve to an object', function() {
+    it('should resolve to an object', function() {
       return db.getTransactionHistory('annie').then((res) => {
         expect(res).to.be.an('object');
       });
     });
-    xit('should have amount, status, type, timestamp, and description data', function() {
+    it('should have amount, status, type, timestamp, and description data', function() {
       return db.getTransactionHistory('annie').then((res => {
         let dataEntry = res.rows[0];
         expect(dataEntry.hasOwnProperty('amount')).to.equal(true);
