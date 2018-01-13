@@ -1,14 +1,7 @@
 import React from 'react';
-import { Card, CardBody, CardSubtitle, CardTitle, CardText, Button } from 'reactstrap'
+import { Card, CardBody, CardSubtitle, CardTitle, CardText, Button } from 'reactstrap';
 
-// const TransactionEntry = props => (
-//   <div>
-//     Entry
-//   </div>
-// );
-const capitalize = function (string) {
-  return string.slice(0, 1).toUpperCase() + string.slice(1);
-};
+import { capitalize } from './../helpers.js';
 
 class TransactionEntry extends React.Component {
   constructor(props) {
@@ -32,19 +25,19 @@ class TransactionEntry extends React.Component {
     }
 
     return (
-        <div id="transactionCard">
-    <Card>
-      <CardBody>
-        <CardTitle>Transaction:</CardTitle>
-        <CardSubtitle>{timestamp}</CardSubtitle>
-        <CardText>
-          {text}
-        </CardText>
-        <Button>View Profile</Button>
-      </CardBody>
-    </Card>
-  </div>
-    )
+      <div id="transactionCard">
+        <Card>
+          <CardBody>
+            <CardTitle>Transaction:</CardTitle>
+            <CardSubtitle>{timestamp}</CardSubtitle>
+            <CardText>
+              {text}
+            </CardText>
+            <Button>View Profile</Button>
+          </CardBody>
+        </Card>
+      </div>
+    );
   }
 }
 

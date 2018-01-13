@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Card } from 'reactstrap'
+import { Card } from 'reactstrap';
 
 class Form extends React.Component {
   constructor(props) {

@@ -1,28 +1,46 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser')
-require('dotenv').config();
-const db = require('../database');
+const dotenv = require('dotenv').config();
 const expressRenderJsx = require('express-render-jsx');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
+const db = require('../database');
+const { sendUserAndTransactions, databaseRespondsCorrectly } = require('./../helpers/index.js');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+passport.use(new LocalStrategy((username, password, cb) => {
+  // if query fails => cb(err)
+  // if the query succeeds and usernmae-password does not match => cb(null, false)
+  // if the query succeeds and usernmae-password matches => cb(null, user)
+
+  db.getUserByName(username)
+    .then((data) => {
+      console.log(data.rows[0]);
+      if (data.rows.length && data.rows[0].password === password) {
+        return cb(null, data.rows[0]);
+      }
+      return cb(null, false);
+    })
+    .catch(err => cb(err));
+  
+}));
+
 app.use(express.static(path.join(__dirname, '../client/dist')));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.post('/payment', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
-  // console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
-  res.statusCode = 201;
-  res.send('Success!')
+  res.send(201, 'Success!');
 });
 
 
 app.post('/request', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
-  res.statusCode = 201;
-  res.send('Success!');
+  res.send(201, 'Success!');
 });
 
 
@@ -38,7 +56,6 @@ app.get('/user/:id', (req, res) => {
   }
 });
 
-
 const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 
 app.get('/profilepage', reactRoute);
@@ -48,23 +65,11 @@ app.get('/login', reactRoute);
 app.get('/signup', reactRoute);
 
 app.get('/profilepage/username/:name', (req, res) => {
-  const { name } = req.params;
-  
-  const responseData = {};
+  const name = req.params.name.toLowerCase();
 
-  db.getUserByName(name)
-    .then((userData) => {
-      checkDatabaseResponse(userData, res);
-      responseData.user = userData.rows[0];
-      db.getTransactionHistory(name)
-        .then((transactionData) => {
-          checkDatabaseResponse(transactionData, res);
-          responseData.transactions = transactionData.rows;
-          res.json(200, responseData);
-        })
-        .catch(err => console.error(err));
-    })
-    .catch(err => console.error(err));
+
+
+  sendUserAndTransactions(name, res);
 });
 
 if (!module.parent) {
@@ -72,8 +77,5 @@ if (!module.parent) {
   console.log(`Listening on ${PORT}`);
 }
 
-const checkDatabaseResponse = function (data, res) {
-  if (data.length === 0 || data.rows.length === 0) res.sendStatus(404);
-};
 
 module.exports.app = app;

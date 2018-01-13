@@ -56,8 +56,6 @@ const getUserByName = (name) => {
 };
 
 
-
-
 module.exports = {
   getUser,
   getTransactionHistory,
