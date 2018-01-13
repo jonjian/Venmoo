@@ -30,7 +30,6 @@ node_modules/
 bower_components/
 config
 
-#Environmental variables
 .env
 
 #Vsc config
