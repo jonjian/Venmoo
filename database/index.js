@@ -66,7 +66,6 @@ const createTransaction = (sender_id, receiver_id, amount, isPayment, callback) 
 };
 
 
-<<<<<<< HEAD
 const updateBalances = () => {
   // change status X
   // change resolved_timestamp X
@@ -81,21 +80,10 @@ const updateBalances = () => {
     .then((res) => {
       const { sender_id, receiver_id, amount, type } = res.rows[0];
       const updateSender = `
-=======
-const updateBalances = (sender_id, receiver_id, isPayment, amount) => {
-  var operation = isPayment ? '+' : '-';
-  const updateReceiver = `UPDATE users
-    SET balance = balance ${operation} ${amount.slice(1)}::float8::numeric::money
-    WHERE id = ${receiver_id};
-  `;
-
-  const updateSender = `
->>>>>>> Scaffolds the updateBalances function
         UPDATE users
         SET balance = balance - ${amount.slice(1)}::float8::numeric::money
         WHERE id = ${sender_id};
       `;
-<<<<<<< HEAD
 
       const updateReceiver = `
         UPDATE users
@@ -112,8 +100,6 @@ const updateBalances = (sender_id, receiver_id, isPayment, amount) => {
     .then(updateReceiver => client.query(updateReceiver))
     // .then(cb(['FILL', 'ME', 'IN', response[0]]))
     .catch((error) => { throw error })
-=======
->>>>>>> Scaffolds the updateBalances function
 };
 
 
