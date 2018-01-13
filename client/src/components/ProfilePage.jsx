@@ -2,6 +2,8 @@ import React from 'react';
 
 import Form from './Form.jsx';
 import TransactionHistory from './TransactionHistory.jsx';
+import PendingTransactions from './PendingTransactions.jsx';
+
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -32,6 +34,7 @@ class ProfilePage extends React.Component {
         <div className="scrollingTransactions">
         <TransactionHistory transactionHist={this.props.transactionHist} user={this.props.user}/>
         </div>
+        <PendingTransactions transactionHist={this.props.transactionHist} user={this.props.user}/>
       </div>);
   }
 }

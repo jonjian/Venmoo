@@ -17,6 +17,43 @@ const testQuote2 = '"a"'
 const testQuote1 = "'a'"
 
 const testBase = 'hello'
+
+
+```
+Test most as public in .yaml
+
+```
+
+const  = \`
+env:
+  - DB=postgres
+  - TEST=${test}
+  - TEST_ENCODED=${testEncoded}
+  - TEST_QUOTE1=${testQuote1}
+  - TEST_QUOTE2=${testQuote2}
+  - TEST_BASE=${base}
+\`
+
+```
+
+
+```
+env:
+  global:
+  - DATABASE_URL=postgres://abc:d0ef@hi-j.compute-1.amazonaws.com:5432/dedjj9hcdfiie5
+  - TEST=postgres://abc:d0ef@hi-j.compute-1.amazonaws.com:5432/dedjj9hcdfiie5
+  - TEST_ENCODED=postgres%3A%2F%2Fabc%3Ad0ef%40hi-j.compute-1.amazonaws.com%3A5432%2Fdedjj9hcdfiie5
+  - TEST_QUOTE1='a'
+  - TEST_QUOTE2="a"
+  - TEST_BASE=hello
+
+```
+
+So then
+```
+travis encrypt DATABASE_URL=postgres://abc:d0ef@hi-j.compute-1.amazonaws.com:5432/dedjj9hcdfiie5
+```
+
 ```
 
 Add two environment variables hashed using travis encrypt cli
@@ -32,4 +69,3 @@ coded vs unencoded
 no quotes
 single quotes
 double quotes
-'?'

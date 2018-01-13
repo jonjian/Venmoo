@@ -82,7 +82,7 @@ app.get('/profilepage/username/:name', (req, res) => {
         .then((transactionData) => {
           checkDatabaseResponse(transactionData, res);
           responseData.transactions = transactionData.rows;
-          res.json(200, responseData);
+          res.status(200).json(responseData);
         })
         .catch(err => console.error(err));
     })
@@ -100,6 +100,34 @@ app.post('/transaction/accept/:id-:status', (req, res) => {
   }
 });
 
+
+
+app.get('/user/:id/pending', (req, res) => {
+  const { id } = req.params;
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid user id, should be a postive integer');
+  } else {
+    db.getPending(id, (data) => {
+      res.send(JSON.stringify(data));
+    });
+  }
+});
+
+app.get('/user/:id', (req, res) => {
+  const { id } = req.params;
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid user id, should be a postive integer');
+  } else {
+    db.getUser(id, (data) => {
+      if (data.length === 0) {
+        res.status(404);
+        res.send('no user in database with matching id');
+      } else {
+        res.send(JSON.stringify(data));
+      }
+    });
+  }
+});
 
 if (!module.parent) {
   app.listen(PORT);

@@ -19,7 +19,9 @@ const getTransactionHistory = function (userName) {
     tab.resolved_timestamp,
     tab.description,
     tab.sender_name,
-    users.name AS receiver_name
+    users.name AS receiver_name,
+    tab.sender_id,
+    tab.receiver_id
   FROM
     (SELECT
       transactions.id AS transaction_id,
@@ -30,6 +32,7 @@ const getTransactionHistory = function (userName) {
       transactions.resolved_timestamp,
       transactions.description,
       transactions.receiver_id,
+      transactions.sender_id,
       users.name AS sender_name
     FROM transactions, users
     WHERE transactions.sender_id = users.id)
@@ -135,6 +138,25 @@ const transactionAccept = (id, status, cb) => {
   }
 };
 
+// const getPending = (sender_id, cb) => {
+//   const q = `SELECT * FROM transactions WHERE sender_id = ${sender_id}`;
+//   client.query(q, (err, res) => {
+//     if (err) throw err;
+//     console.log(r)
+//     cb(res.rows);
+//   });
+// };
+
+const getPending = (id, cb) => {
+  client.query(`
+      SELECT * from transactions
+      WHERE sender_id = ${id}
+      AND status = 'pending';
+    `, (err, res) => {
+    if (err) throw err;
+    cb(res.rows);
+  });
+};
 
 module.exports = {
   getUser,
@@ -142,4 +164,5 @@ module.exports = {
   getUserByName,
   createTransaction,
   transactionAccept,
+  getPending,
 };

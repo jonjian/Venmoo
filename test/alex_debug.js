@@ -22,6 +22,15 @@ envNames.forEach(x => console.log(process.env[x]))
 
 
 // ALEX DEBUG BLOCK END
+
+
+// ALEX DEBUG BLOCK START
+require('dotenv').config();
+const envNames = ['DATABASE_URL', 'DBURL', 'PORT']
+envNames.forEach(x => console.log(x, process.env[x]))
+
+
+// ALEX DEBUG BLOCK END
 /*
 env:
   global:
