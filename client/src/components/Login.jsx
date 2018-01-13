@@ -20,9 +20,9 @@ class Login extends React.Component {
       dataType: 'json',
       success: (data) => {
         console.log('success: ', data);
-        this.props.renderUser(data.user, data.transactions)
-        console.log(data.user)
-        console.log(data.transactions)
+        this.props.renderUser(data.user, data.transactions);
+        console.log(data.user);
+        console.log(data.transactions);
       },
       error: (err) => {
         console.log('error in ajax get ', err);
@@ -35,28 +35,39 @@ class Login extends React.Component {
   }
 
   render() {
-    return (
-      <form action="/login" method="post">
+    return (<div id="contentLogin">
         <div>
-        <label>Username:</label>
-        <input type="text" onChange={this.handleChange.bind(this)} name="username" />
-      </div>
-        <div>
-        <label>Password:</label>
-        <input type="password" name="password" />
-      </div>
-        <div>
-        <Link to={`/profilepage/username/${this.state.username}`}>
-          <input className="loginButton" type="submit" onClick={() => this.getRequest()} value="Log In" />
-        </Link>
-        <br />
-        <Link to="/signup">
-          <input className="loginButton" type="submit" value="No Account? Sign Up Here" />
-        </Link>
-      </div>
-      </form>
-    );
+          <form action="/login" method="post">
+            <div>
+              <br />
+              <br />
+              <br />
+              <label>Username:</label>
+              <input type="text" onChange={this.handleChange.bind(this)} name="username" />
+            </div>
+            <div>
+              <label>Password:</label>
+              <input type="password" name="password" />
+            </div>
+            <div>
+              <Link to={`/profilepage/username/${this.state.username}`}>
+                <input className="loginButton" type="submit" onClick={() => this.getRequest()} value="Log In" />
+              </Link>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <Link to="/signup">
+                <input className="loginButton" type="submit" value="No Account? Sign Up Here" />
+              </Link>
+            </div>
+          </form>
+        </div>
+      </div>);
   }
 }
+
 
 export default Login;
