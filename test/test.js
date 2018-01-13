@@ -134,18 +134,33 @@ describe('Database', function() {
         expect(dataEntry.hasOwnProperty('created_timestamp')).to.equal(true);
         expect(dataEntry.hasOwnProperty('resolved_timestamp')).to.equal(true);
         expect(dataEntry.hasOwnProperty('description')).to.equal(true);
-
       }))
     })
   });
   describe('updateBalances', function() {
     it('should be a function', function() {
-      expect(db.getTransactionHistory).to.be.a('function');
+      expect(db.updateBalances).to.be.a('function');
     });
-  })
+
+    it('should update balance', function() {
+      // could get previous balance
+      // create transaction
+      // chain balance check again
+
+      })
+  });
   describe('createTransaction', function() {
     it('should be a function', function() {
       expect(db.getTransactionHistory).to.be.a('function');
     });
+    it('should create transaction in table', function() {
+      return db.createTransaction(3, 4, '33.33', true)
+        .then(db.getTransactionHistory('connie')
+        .then((data, done) => {
+          expect(data.rows[data.rows.length - 1].amount).to.equal(33.33);
+          done();
+        })
+        )
+    })
   })
 });
