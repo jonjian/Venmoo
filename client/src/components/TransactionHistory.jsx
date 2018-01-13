@@ -6,6 +6,7 @@ const TransactionHistory = props => (
 
     {props.transactionHist
       .filter(entry => (entry.status === 'approved'))
+      .sort((a, b) => a.resolved_timestamp < b.resolved_timestamp ? 1 : -1 )
       .map(entry => {
       return <TransactionEntry
             transaction={entry}
