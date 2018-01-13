@@ -14,8 +14,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: response.user,
-      transactionHist: response.transactions,
+      user: null,
+      transactionHist: null,
     };
     this.renderUser = this.renderUser.bind(this);
   }

@@ -14,6 +14,7 @@ const databaseRespondsCorrectly = function (data, res) {
 
 const sendUserAndTransactions = function (username, res) {
   const responseData = {};
+  console.log('hello');
 
   db.getUserByName(username)
     .then((userData) => {

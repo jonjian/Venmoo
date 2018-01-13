@@ -15,25 +15,29 @@ class Login extends React.Component {
     };
   }
 
-  getRequest() {
-    // jquery.ajax({
-    //   url: `/profilepage/username/${this.state.username}`,
-    //   type: 'GET',
-    //   dataType: 'json',
-    //   success: (data) => {
-    //     console.log('success: ', data);
-    //     this.props.renderUser(data.user, data.transactions);
-    //     console.log(data.user);
-    //     console.log(data.transactions);
-    //   },
-    //   error: (err) => {
-    //     console.log('error in ajax get ', err);
-    //   },
-    // });
 
+  // getRequest() {
+  // jquery.ajax({
+  //   url: `/profilepage/username/${this.state.username}`,
+  //   type: 'GET',
+  //   dataType: 'json',
+  //   success: (data) => {
+  //     console.log('success: ', data);
+  //     this.props.renderUser(data.user, data.transactions);
+  //     console.log(data.user);
+  //     console.log(data.transactions);
+  //   },
+  //   error: (err) => {
+  //     console.log('error in ajax get ', err);
+  //   },
+  // });
+
+  // }
+
+  postRequest(username, password) {
     Axios.post('/profilepage', {
-      username: 'annie',
-      password: '123',
+      username,
+      password,
     })
       .then((res) => {
         this.props.renderUser(res.data.user, res.data.transactions);
@@ -41,11 +45,24 @@ class Login extends React.Component {
       .catch(err => console.error(err));
   }
 
-  handleChange(event) {
+  handleUsernameChange(event) {
     this.setState({ username: event.target.value });
   }
 
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  handleSubmit() {
+    this.postRequest(this.state.username, this.state.password);
+  }
+
   // Make the password form change the state on change. Upon form submission, send POST request.
+  // Currently, we use a link to load the profile page, which renders with the hardcoded
+  // information regardless of what comes back from the server. We shouldn't try to render
+  // the profile page until a response is received from the server.
+
+  // Can we use routing to direct the page from inside renderUser?
   render() {
     return (<div id="contentLogin">
         <div>
@@ -55,15 +72,15 @@ class Login extends React.Component {
               <br />
               <br />
               <label>Username:</label>
-              <input type="text" onChange={this.handleChange.bind(this)} name="username" />
+              <input type="text" onChange={this.handleUsernameChange.bind(this)} name="username" />
             </div>
             <div>
               <label>Password:</label>
-              <input type="password" name="password" />
+              <input type="password" onChange={this.handlePasswordChange.bind(this)} name="password" />
             </div>
             <div>
               <Link to={`/profilepage/username/${this.state.username}`}>
-                <input className="loginButton" type="submit" onClick={() => this.getRequest()} value="Log In" />
+                <input className="loginButton" type="submit" onClick={this.handleSubmit.bind(this)} value="Log In" />
               </Link>
               <br />
               <br />
