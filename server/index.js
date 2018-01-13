@@ -65,7 +65,7 @@ app.get('/user/:id', (req, res) => {
 //comment to make change
 const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 
-app.get("/profile", reactRoute);
+app.get("/profilepage", reactRoute);
 
 app.get('/login', reactRoute);
 
@@ -85,7 +85,7 @@ app.get('/profilepage/username/:name', (req, res) => {
         .then((transactionData) => {
           checkDatabaseResponse(transactionData, res);
           responseData.transactions = transactionData.rows;
-          res.redirect('/profile').json(responseData);
+          res.redirect('/profilepage').json(responseData);
         })
         .catch(err => console.error(err));
     })
