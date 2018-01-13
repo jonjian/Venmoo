@@ -19,6 +19,7 @@ class Main extends React.Component {
       <ProfilePage
         user={this.props.user}
         transactionHist={this.props.transactionHist}
+        renderUser={this.props.renderUser}
       />
     );
   }

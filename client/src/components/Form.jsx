@@ -1,6 +1,6 @@
 import React from 'react';
+
 import axios from 'axios';
-import { Card } from 'reactstrap'
 
 class Form extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class Form extends React.Component {
       isPayment: true,
       otherUser: '',
       amount: '',
-      message: '',
+      message: ''
     };
 
     this.togglePaymentTrue = this.togglePaymentTrue.bind(this);
@@ -38,91 +38,75 @@ class Form extends React.Component {
 
   otherUserChangeHandler(event) {
     event.preventDefault();
-    this.setState({ otherUser: event.target.value });
+    this.setState({otherUser: event.target.value})
   }
 
   amountChangeHandler(event) {
     event.preventDefault();
-    this.setState({ amount: event.target.value });
+    this.setState({amount: event.target.value})
   }
 
   messageChangeHandler(event) {
     event.preventDefault();
-    this.setState({ message: event.target.value });
+    this.setState({message: event.target.value})
   }
 
   formSubmitHandler(event) {
     event.preventDefault();
-    const url = this.state.isPayment ? '/payment' : '/request';
+    var time = new Date();
+    var url = this.state.isPayment ? '/payment' : '/request';
     axios.post(url, {
+      senderObj: this.props.user,
       username: this.state.otherUser,
       amount: this.state.amount,
       isPayment: this.state.isPayment,
-      message: this.state.message,
+      message: this.state.message
     })
 
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then((response) => {
+      console.log('hello');
+      console.log(response.data.rows);
+      this.props.renderUser(this.props.user, response.data.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   render() {
-    return (
-    <div id="form" className="container">
-    <Card >
+    return(
+      <div id="form">
         <br />
-        <h1>
-          {" "}
-          {this.state.isPayment
-            ? "Pay a friend"
-            : "Request money from a friend"}{" "}
-        </h1>
-        <div className="tab container">
-          <button type="submit" onClick={this.togglePaymentTrue}>
-            {" "}
-            Pay{" "}
-          </button>
-          <button type="submit" onClick={this.togglePaymentFalse}>
-            {" "}
-            Request{" "}
-          </button>
+        <h1> {this.state.isPayment ? 'TRUE' : 'FALSE'} </h1>
+        <div className='tab'>
+          <button type="submit" onClick={this.togglePaymentTrue}> Pay </button>
+          <button type="submit" onClick={this.togglePaymentFalse}> Request </button>
         </div>
 
         <form onSubmit={this.formSubmitHandler}>
           <br />
           <br />
           <label> To: </label>
-          <input className="container" type="textarea" onChange={this.otherUserChangeHandler} />
+          <input type="textarea" onChange={this.otherUserChangeHandler} />
           <br />
           <br />
           <label> Amount: </label>
-          $<input className="container" type="textarea" onChange={this.amountChangeHandler} />
+          $<input type="textarea" onChange={this.amountChangeHandler} />
           <br />
           <br />
           <label> Message: </label>
-          <input className="container" type="textarea" onChange={this.messageChangeHandler} />
+          <input type="textarea" onChange={this.messageChangeHandler} />
           <br />
           <br />
           <br />
-          {this.state.isPayment ? <div className="container">
-              {" "}
-              <button className="container" id="decisionBtn" type="submit" value="Submit">
-                Pay
-              </button>
-            </div> : <div>
-              {" "}
-              <button id="decisionBtn" type="submit">
-                {" "}
-                Request{" "}
-              </button>{" "}
-            </div>}
+          {this.state.isPayment ?
+          (<div> <button id="decisionBtn" type="submit" value="Submit">
+            Pay </button> </div>)
+          :
+          (<div> <button id="decisionBtn" type="submit"> Request </button> </div>)}
         </form>
-      </Card >
-      </div>);
-  }
+      </div>
+  )};
 }
 
 export default Form;

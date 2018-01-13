@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 client.connect();
-
+//check
 const getTransactionHistory = function (userName) {
   const queryString = `
   SELECT
@@ -55,6 +55,23 @@ const getUserByName = (name) => {
   return client.query(queryString);
 };
 
+const createTransaction = (sender_id, receiver_id, amount, isPayment, callback) => {
+  let approval = isPayment ? "'approved'" : "'pending'";
+  let typeOfTransaction = isPayment ? "'payment'" : "'request'";
+  let timeStamp = isPayment ? 'now(), now()' : 'now(), null';
+  return client.query(`INSERT INTO transactions(sender_id, receiver_id, amount, status, type, created_timestamp, resolved_timestamp)
+  VALUES(${sender_id},${receiver_id},${amount},${approval},${typeOfTransaction},${timeStamp});`)
+
+};
+
+
+const updateBalance = (isPayment) => {
+  var operation = isPayment ? '+' : '-';
+  const updateReceiver = `UPDATE users
+    SET balance = balance ${operation} ${amount.slice(1)}::float8::numeric::money
+    WHERE id = ${receiver_id};
+  `;
+};
 
 
 
@@ -62,4 +79,5 @@ module.exports = {
   getUser,
   getTransactionHistory,
   getUserByName,
+  createTransaction
 };

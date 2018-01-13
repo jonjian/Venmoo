@@ -12,12 +12,30 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.json())
 
 app.post('/payment', (req, res) => {
-  let {username, amount, isPayment, message} = req.body;
-  // console.log('Recieved ' + amount + ' from ' + username + ' who said ' + message);
-  res.statusCode = 201;
-  res.send('Success!')
+  let {senderObj, username, amount, isPayment, message} = req.body;
+  console.log('SENDER: ', senderObj);
+  db.getUserByName(username)
+    .then((data) => {
+      let {id, name} = data.rows[0];
+      db.createTransaction(senderObj.id, id, amount, isPayment)
+        .then(() => {
+          db.getTransactionHistory(senderObj.name)
+            .then((data) => {
+              let { rows } = data;
+              res.statusCode = 201;
+              res.send(data);
+            })
+        })
+        .catch(() => { console.error() })
+
+    })
+    .catch(() => {
+      console.error();
+    })
 });
 
+// if user is in database
+// find user's balance, and update accordingly
 
 app.post('/request', (req, res) => {
   let {username, amount, isPayment, message} = req.body;
@@ -38,7 +56,7 @@ app.get('/user/:id', (req, res) => {
   }
 });
 
-
+//comment to make change
 const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 
 app.get('/profilepage', reactRoute);
@@ -49,7 +67,7 @@ app.get('/signup', reactRoute);
 
 app.get('/profilepage/username/:name', (req, res) => {
   const { name } = req.params;
-  
+
   const responseData = {};
 
   db.getUserByName(name)
