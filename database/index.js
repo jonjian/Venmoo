@@ -70,13 +70,12 @@ const updateBalances = () => {
   // change status X
   // change resolved_timestamp X
   // change balance of both users
-  const response = ['success'];
-
+  // const response = ['success'];
   const selectQ = `
     SELECT * FROM transactions order by id desc limit 1;
   `;
 
-  client.query(selectQ)
+  return client.query(selectQ)
     .then((res) => {
       const { sender_id, receiver_id, amount, type } = res.rows[0];
       const updateSender = `
