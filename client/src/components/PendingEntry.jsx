@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+const moment = require('moment');
+
 
 // const PendingEntry = (props) => {
 //   const id = props.entry.transaction_id;
@@ -28,6 +30,7 @@ class PendingEntry extends React.Component {
     this.setState({ isVisible: false });
   }
 
+// &npbsp; is a single space
   render() {
     const id = this.state.entry.transaction_id;
     const accept = () => {
@@ -41,7 +44,9 @@ class PendingEntry extends React.Component {
     return (
       this.state.isVisible === true ?
         <li className="pendingItem">
-          {this.state.entry.receiver_name} is requesting {this.state.entry.amount}
+          At {moment(this.state.entry.created_timestamp).format('lll')},&nbsp;
+          {this.state.entry.receiver_name} requested&nbsp;
+          <span className="bold">&nbsp;{this.state.entry.amount}&nbsp;</span>
           <button onClick={accept}>agree to pay</button>
           <button onClick={decline}>decline request</button>
         </li>
