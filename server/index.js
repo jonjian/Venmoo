@@ -3,14 +3,17 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv').config();
 const expressRenderJsx = require('express-render-jsx');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 
 const db = require('../database');
 const { sendUserAndTransactions, databaseRespondsCorrectly } = require('./../helpers/index.js');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+
+
+const passport = require('passport');
+// const LocalStrategy = require('passport-local').Strategy;
+const { Strategy: LocalStrategy } = require('passport-local');
 
 passport.use(new LocalStrategy((username, password, cb) => {
   // if query fails => cb(err)
@@ -66,9 +69,6 @@ app.get('/signup', reactRoute);
 
 app.get('/profilepage/username/:name', (req, res) => {
   const name = req.params.name.toLowerCase();
-
-
-
   sendUserAndTransactions(name, res);
 });
 
