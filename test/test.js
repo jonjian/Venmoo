@@ -110,7 +110,7 @@ describe('Client', function() {
   });
 });
 
-
+// tests for DB 
 describe('Database', function() {
   describe('getTransactionHistory', function() {
     it('should be a function', function() {
