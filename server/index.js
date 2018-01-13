@@ -25,12 +25,31 @@ app.post('/payment', (req, res) => {
     .then((data) => {
       const { id } = data.rows[0];
       db.createTransaction(senderObj.id, id, amount, isPayment)
+<<<<<<< HEAD
         .then(db.updateBalances)
         .then(() => {
           res.statusCode = 201;
           res.end();
         })
         .catch(() => console.error())
+=======
+        .then((data) => {
+          db.getTransactionHistory(senderObj.name)
+            .then((data) => {
+              let { rows } = data;
+              res.statusCode = 201;
+              res.send(data);
+            })
+        })
+        .then((data) => {
+          console.log('second promise')
+        })
+        .catch(() => { console.error() })
+
+    })
+    .catch(() => {
+      console.error();
+>>>>>>> Scaffolds the updateBalances function
     })
     .catch(() => { console.error(); });
 });
