@@ -1,5 +1,5 @@
 body {
-    background-color: whitesmoke; 
+    background-color: whitesmoke;
 }
 
 div#form {
@@ -181,4 +181,8 @@ body.thin::-webkit-scrollbar {
 
 .loginBox {
     margin-top: auto
+}
+
+.bold {
+  font-weight:bold;
 }
