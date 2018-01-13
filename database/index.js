@@ -78,7 +78,6 @@ const updateBalances = (sender_id, receiver_id, isPayment, amount) => {
         SET balance = balance - ${amount.slice(1)}::float8::numeric::money
         WHERE id = ${sender_id};
       `;
-<<<<<<< HEAD
 };
 const transactionAcceptApprove = (id, cb) => {
   // change status X
@@ -142,8 +141,6 @@ const transactionAccept = (id, status, cb) => {
       cb([response]);
     });
   }
-=======
->>>>>>> 2e466df48fc4e17de720261634c007512a8ee56e
 };
 
 // const getPending = (sender_id, cb) => {
