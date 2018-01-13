@@ -20,7 +20,7 @@ import { response } from './../database/dummy-data.js';
 
 configure({ adapter: new Adapter() });
 
-describe('server', () => {
+describe('Server', () => {
   describe('GET /user/:id', () => {
     it('should return an object of user info when id is a user', function(done) {
       request
@@ -138,4 +138,14 @@ describe('Database', function() {
       }))
     })
   });
+  describe('updateBalances', function() {
+    it('should be a function', function() {
+      expect(db.getTransactionHistory).to.be.a('function');
+    });
+  })
+  describe('createTransaction', function() {
+    it('should be a function', function() {
+      expect(db.getTransactionHistory).to.be.a('function');
+    });
+  })
 });
