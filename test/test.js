@@ -143,9 +143,48 @@ describe('Database', function() {
     });
 
     it('should update balance', function() {
-      // could get previous balance
-      // create transaction
-      // chain balance check again
+      db.getUserBalance('connie')
+      .then((balance) => {
+        let test = balance.rows[0].balance;
+
+        return test;
+      })
+      .then((test, done) => {
+        db.createTransaction(3, 4, '33.33', true)
+          .then(() => {
+            db.updateBalances()
+              .then(() => {
+                db.getUserBalance('connie')
+                  .then((data) => {
+                    expect(data.rows[0].balance).to.equal(test - 41);
+                    done()
+                  })
+              })
+          })
+
+      })
+
+
+
+      // .then((test) => {
+      //   console.log('test:', test);
+      //   db.getUserBalance('connie')
+      //     .then((data) => {
+      //       console.log(data.rows[0].balance)
+      //     })
+      // })
+      // TODO from the create Transactions:
+      // .then( (test) =>
+      //   {
+      //     db.updateBalances()
+      //     .then((test) => {
+      //
+      //       db.getUserBalance('connie')
+      //         .then((data) => {
+      //           console.log(data.rows[0].balance)
+      //         })
+      //     })}
+      // )
 
       })
   });

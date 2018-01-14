@@ -190,6 +190,21 @@ const transactionAccept = (id, status, cb) => {
   }
 };
 
+const getUserBalance = (name) => {
+  return client.query(`select balance from users where name='${name}'`);
+}
+
+
+
+// const getPending = (sender_id, cb) => {
+//   const q = `SELECT * FROM transactions WHERE sender_id = ${sender_id}`;
+//   client.query(q, (err, res) => {
+//     if (err) throw err;
+//     console.log(r)
+//     cb(res.rows);
+//   });
+// };
+
 const getPending = (id, cb) => {
   client.query(`
       SELECT * from transactions
@@ -202,6 +217,7 @@ const getPending = (id, cb) => {
 };
 
 module.exports = {
+  getUserBalance,
   updateBalances,
   getUser,
   getTransactionHistory,
