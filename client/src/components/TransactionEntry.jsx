@@ -1,7 +1,10 @@
 import React from 'react';
-import { Card, CardBody, CardSubtitle, CardTitle, CardText, Button } from 'reactstrap';
+import { Card, CardBody, CardSubtitle, CardTitle, CardText, Button } from 'reactstrap'
+const moment = require('moment');
+
 
 import { capitalize } from './../helpers.js';
+
 
 class TransactionEntry extends React.Component {
   constructor(props) {
@@ -13,31 +16,25 @@ class TransactionEntry extends React.Component {
     const sender = capitalize(transaction.sender_name === user.name ? 'you' : transaction.sender_name);
     const receiver = capitalize(transaction.receiver_name === user.name ? 'you' : transaction.receiver_name);
 
-    let text;
-    let timestamp;
-
-    if (transaction.type === 'payment') {
-      text = `${sender} paid ${receiver} ${transaction.amount}`;
-      timestamp = transaction.resolved_timestamp;
-    } else if (transaction.type === 'request') {
-      text = `${receiver} charged ${sender} ${transaction.amount}`;
-      timestamp = transaction.created_timestamp;
-    }
+    const timestamp = transaction.resolved_timestamp;
+    const text = (sender === 'you')
+      ? `${sender} paid ${receiver} ${transaction.amount}`
+      : `${receiver} charged ${sender} ${transaction.amount}`;
 
     return (
-      <div id="transactionCard">
-        <Card>
-          <CardBody>
-            <CardTitle>Transaction:</CardTitle>
-            <CardSubtitle>{timestamp}</CardSubtitle>
-            <CardText>
-              {text}
-            </CardText>
-            <Button>View Profile</Button>
-          </CardBody>
-        </Card>
-      </div>
-    );
+        <div id="transactionCard">
+    <Card>
+      <CardBody>
+        <CardTitle>Transaction:</CardTitle>
+        <CardSubtitle>{moment(timestamp).format('lll')}</CardSubtitle>
+        <CardText>
+          {text}
+        </CardText>
+        <Button>View Profile</Button>
+      </CardBody>
+    </Card>
+  </div>
+    )
   }
 }
 

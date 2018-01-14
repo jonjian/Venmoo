@@ -2,6 +2,7 @@ const { expect } = require('chai');
 // const ChaiAsPromi
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
+require('dotenv').config();
 
 const supertest = require('supertest');
 const request = supertest.agent(server);
@@ -12,25 +13,21 @@ import { configure, shallow, mount, render } from 'enzyme';
 import ProfilePage from '../client/src/components/ProfilePage.jsx';
 import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
+
 import { response } from './../database/dummy-data.js';
+
+
+
 
 configure({ adapter: new Adapter() });
 
 describe('server', () => {
   describe('GET /user/:id', () => {
-    xit('should return an object of user info when id is a user', function(done) {
+    it('should return an object of user info when id is a user', function(done) {
       request
         .get('/user/1')
         .expect(200)
-        .expect(/annie/, done); 
-      // request
-      //   .get('/user/1')
-      //   .then((res) => {
-      //     let data = JSON.parse(res.text);
-      //     console.log(data);
-      //     expect(res.status).to.equal(200);
-      //     expect(data.name).to.equal('annie');
-      //   });
+        .expect(/annie/, done);
     });
 
     it('should 404 when given an invalid user id', function(done) {
@@ -65,7 +62,6 @@ describe('server', () => {
         expect(data.hasOwnProperty('user')).to.equal(true);
         expect(data.user.name).to.equal('annie');
         expect(data.hasOwnProperty('transactions')).to.equal(true);
-        expect(data.transactions[0].transaction_id).to.equal(1);
         done();
       })
       .catch(err => {
@@ -80,22 +76,26 @@ describe('server', () => {
   describe('POST /payments and /request', () => {
     it('should 201 when posting to /payment', function(done) {
     request
-      .post('/payment', {username: 'test',
-        amount: '30',
+      .post('/payment')
+      .send({
+        senderObj: {id: 2},
+        username: 'annie',
+        amount: '20.00',
         isPayment: true,
-        message: 'This is a test!'})
-      .expect('Success!')
+      })
       .expect(201, done)
     });
 
     it('should 201 when posting to /request', function(done) {
     request
-      .post('/request', {username: 'test',
-        amount: '30',
-        isPayment: false,
-        message: 'This is a test!'})
-      .expect('Success!')
-      .expect(201, done)
+    .post('/payment')
+    .send({
+      senderObj: {id: 2},
+      username: 'annie',
+      amount: '20.00',
+      isPayment: false,
+    })
+    .expect(201, done)
     });
 
   })
@@ -109,7 +109,7 @@ describe('Client', function() {
       expect(component.find('div').toExist);
     });
   });
-  
+
   describe("react router signup test", () => {
     it("should render signup on login", () => {
       const component = shallow(<SignUp />);

@@ -64,12 +64,10 @@ class Form extends React.Component {
     })
 
     .then((response) => {
-      console.log('hello');
-      console.log(response.data.rows);
-      this.props.renderUser(this.props.user, response.data.rows);
+      console.log(response)
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
   }
 
@@ -77,7 +75,6 @@ class Form extends React.Component {
     return(
       <div id="form">
         <br />
-        <h1> {this.state.isPayment ? 'TRUE' : 'FALSE'} </h1>
         <div className='tab'>
           <button type="submit" onClick={this.togglePaymentTrue}> Pay </button>
           <button type="submit" onClick={this.togglePaymentFalse}> Request </button>

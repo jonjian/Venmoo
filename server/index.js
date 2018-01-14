@@ -36,47 +36,58 @@ passport.use(new LocalStrategy((username, password, done) => {
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.json());
 
+
+// `select * from transactions where id = (select last_value from transactions_id_seq);`
+
 app.post('/payment', (req, res) => {
-  let {senderObj, username, amount, isPayment, message} = req.body;
-  console.log('SENDER: ', senderObj);
+  const {
+    senderObj,
+    username,
+    amount,
+    isPayment,
+  } = req.body;
   db.getUserByName(username)
     .then((data) => {
-      let {id, name} = data.rows[0];
+      const { id } = data.rows[0];
       db.createTransaction(senderObj.id, id, amount, isPayment)
+        .then(db.updateBalances)
         .then(() => {
-          db.getTransactionHistory(senderObj.name)
-            .then((data) => {
-              let { rows } = data;
-              res.statusCode = 201;
-              res.send(data);
-            })
+          res.statusCode = 201;
+          res.end();
         })
-        .catch(() => { console.error() })
-
+        .catch((error) => { throw error; });
     })
-    .catch(() => {
-      console.error();
-    })
+    .catch((error) => { throw error; });
 });
 
 app.post('/profilepage', passport.authenticate('local'), (req, res) => {
-  console.log('request authenticated');
   let { username } = req.body;
   sendUserAndTransactions(username, req, res);
 });
 
-// app.post('/profilepage', (req, res) => {
-//   console.log('request authenticated');
-//   let { username } = req.body;
-//   sendUserAndTransactions(username, req, res);
-// });
 
 // if user is in database
 // find user's balance, and update accordingly
 
 app.post('/request', (req, res) => {
-  let {username, amount, isPayment, message} = req.body;
-  res.send(201, 'Success!');
+  const {
+    senderObj,
+    username,
+    amount,
+    isPayment,
+  } = req.body;
+  db.getUserByName(username)
+    .then((data) => {
+      const { id } = data.rows[0];
+      db.createTransaction(senderObj.id, id, amount, isPayment)
+        .then(db.updateBalances)
+        .then(() => {
+          res.statusCode = 201;
+          res.end();
+        })
+        .catch((error) => { throw error; });
+    })
+    .catch((error) => { throw error; });
 });
 
 
@@ -86,8 +97,12 @@ app.get('/user/:id', (req, res) => {
     res.status(404).send('invalid user id, should be a postive integer');
   } else {
     db.getUser(id, (data) => {
-      if (data.length === 0) res.status(404);
-      res.send(JSON.stringify(data[0]));
+      if (data.length === 0) {
+        res.status(404);
+        res.send('no user in database with matching id');
+      } else {
+        res.send(JSON.stringify(data[0]));
+      }
     });
   }
 });
@@ -101,10 +116,65 @@ app.get('/', reactRoute);
 
 app.get('/signup', reactRoute);
 
-// app.get('/profilepage/username/:name', (req, res) => {
-//   const name = req.params.name.toLowerCase();
-//   sendUserAndTransactions(name, res);
-// });
+app.get('/profilepage/username/:name', (req, res) => {
+  const { name } = req.params;
+
+  const responseData = {};
+
+  db.getUserByName(name)
+    .then((userData) => {
+      checkDatabaseResponse(userData, res);
+      responseData.user = userData.rows[0];
+      db.getTransactionHistory(name)
+        .then((transactionData) => {
+          checkDatabaseResponse(transactionData, res);
+          responseData.transactions = transactionData.rows;
+          res.status(200).json(responseData);
+        })
+        .catch(err => console.error(err));
+    })
+    .catch(err => console.error(err));
+});
+
+app.post('/transaction/accept/:id-:status', (req, res) => {
+  const { id, status } = req.params;
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid transaction id, should be a postive integer');
+  } else if (status !== 'approved' && status !== 'declined') {
+    res.status(404).send('invalid status parameter, should be "approved" or "declined"');
+  } else {
+    db.transactionAccept(id, status, (data) => { res.send(data); });
+  }
+});
+
+
+
+app.get('/user/:id/pending', (req, res) => {
+  const { id } = req.params;
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid user id, should be a postive integer');
+  } else {
+    db.getPending(id, (data) => {
+      res.send(JSON.stringify(data));
+    });
+  }
+});
+
+app.get('/user/:id', (req, res) => {
+  const { id } = req.params;
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid user id, should be a postive integer');
+  } else {
+    db.getUser(id, (data) => {
+      if (data.length === 0) {
+        res.status(404);
+        res.send('no user in database with matching id');
+      } else {
+        res.send(JSON.stringify(data));
+      }
+    });
+  }
+});
 
 if (!module.parent) {
   app.listen(PORT);
