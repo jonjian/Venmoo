@@ -23,6 +23,7 @@
     "express": "^4.16.2",
     "express-react-engine": "^1.0.0",
     "express-render-jsx": "^1.0.1",
+    "history": "^4.7.2",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "nodemon": "^1.14.9",

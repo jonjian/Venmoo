@@ -14,19 +14,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
-      transactionHist: null,
+      redirectToProfilePage: false,
+      user: {},
+      transactionHist: [],
     };
     this.renderUser = this.renderUser.bind(this);
   }
 
-  renderUser(user, history) {
-    console.log(user);
-    console.log(history);
+
+  renderUser(user, transactionHist) {
     this.setState({
       user,
-      transactionHist: history,
+      transactionHist,
+      redirectToProfilePage: true,
     });
+    // this.props.history.push('/profilepage');
   }
 
   render() {
@@ -37,6 +39,7 @@ class App extends React.Component {
           user={this.state.user}
           transactionHist={this.state.transactionHist}
           renderUser={this.renderUser}
+          redirectToProfilePage={this.state.redirectToProfilePage}
         />
       </div>
     );

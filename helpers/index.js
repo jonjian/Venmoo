@@ -12,23 +12,28 @@ const databaseRespondsCorrectly = function (data, res) {
   return true;
 };
 
-const sendUserAndTransactions = function (username, res) {
+const sendUserAndTransactions = function (username, req, res) {
   const responseData = {};
-  console.log('hello');
 
   db.getUserByName(username)
     .then((userData) => {
       if (!databaseRespondsCorrectly(userData, res)) {
+        console.log('invalid query');
         return;
       }
       responseData.user = userData.rows[0];
       db.getTransactionHistory(username)
         .then((transactionData) => {
           if (!databaseRespondsCorrectly(transactionData, res)) {
+            console.log('invalid query');
             return;
           }
+          console.log('sending response');
+          const statusCode = req.method === 'POST' ? 201 : 200;
+          console.log('method', res);
+
           responseData.transactions = transactionData.rows;
-          res.json(200, responseData);
+          res.status(statusCode).json(responseData);
         })
         .catch(err => console.error(err));
     })

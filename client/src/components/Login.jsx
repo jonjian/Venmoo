@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch, Redirect } from 'react-router-dom';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import jquery from 'jquery';
 import Axios from 'axios';
@@ -9,10 +9,13 @@ import ProfilePage from './ProfilePage.jsx';
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    console.log('login: ', props);
     this.state = {
+      redirectToProfilePage: props.redirectToProfilePage,
       username: '',
       password: '',
     };
+    console.log(this.state);
   }
 
 
@@ -34,15 +37,39 @@ class Login extends React.Component {
 
   // }
 
+  // Login button sends post request. Post request triggers state change.
+  // should render profile page after state change.
+
   postRequest(username, password) {
     Axios.post('/profilepage', {
       username,
       password,
     })
       .then((res) => {
+        console.log('data: ', res.data);
         this.props.renderUser(res.data.user, res.data.transactions);
       })
       .catch(err => console.error(err));
+   
+    // jquery.ajax({
+    //   url: `/profilepage`,
+    //   type: 'POST',
+    //   dataType: 'json',
+    //   contentType: 'application/json',
+    //   data: JSON.stringify({
+    //     username,
+    //     password,
+    //   }),
+    //   success: (data) => {
+    //     console.log('success: ', data);
+    //     this.props.renderUser(data.user, data.transactions);
+    //     console.log(data.user);
+    //     console.log(data.transactions);
+    //   },
+    //   error: (err) => {
+    //     console.log('error in ajax get ', err);
+    //   },
+    // });
   }
 
   handleUsernameChange(event) {
@@ -53,7 +80,8 @@ class Login extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault()
     this.postRequest(this.state.username, this.state.password);
   }
 
@@ -63,10 +91,21 @@ class Login extends React.Component {
   // the profile page until a response is received from the server.
 
   // Can we use routing to direct the page from inside renderUser?
+
+  // <Link to={`/profilepage/username/${this.state.username}`}>
+  // </Link>
+
   render() {
+    console.log('redirect: ', this.state.redirectToProfilePage);
+    // if (this.state.redirectToProfilePage) {
+    //   return (
+    //     <Redirect to="/profilepage" />
+    //   )
+    // }
+
     return (<div id="contentLogin">
         <div>
-          <form action="/login" method="post">
+          <form>
             <div>
               <br />
               <br />
@@ -79,9 +118,9 @@ class Login extends React.Component {
               <input type="password" onChange={this.handlePasswordChange.bind(this)} name="password" />
             </div>
             <div>
-              <Link to={`/profilepage/username/${this.state.username}`}>
+              
                 <input className="loginButton" type="submit" onClick={this.handleSubmit.bind(this)} value="Log In" />
-              </Link>
+              
               <br />
               <br />
               <br />

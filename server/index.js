@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config();
 const expressRenderJsx = require('express-render-jsx');
 
@@ -59,19 +59,17 @@ app.post('/payment', (req, res) => {
     })
 });
 
-// /passport.authenticate('local', { failureRedirect: '/login' }),
+app.post('/profilepage', passport.authenticate('local'), (req, res) => {
+  console.log('request authenticated');
+  let { username } = req.body;
+  sendUserAndTransactions(username, req, res);
+});
 
-app.post('/test', passport.authenticate('local', 
-  {
-    failureRedirect: '/login',
-    // successRedirect: '/profilepage',
-  }), 
-  (req, res) => {
-    console.log('request authenticated');
-    let { username } = req.body;
-    sendUserAndTransactions(username, res);
-  }
-);
+// app.post('/profilepage', (req, res) => {
+//   console.log('request authenticated');
+//   let { username } = req.body;
+//   sendUserAndTransactions(username, req, res);
+// });
 
 // if user is in database
 // find user's balance, and update accordingly
@@ -99,14 +97,14 @@ const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client
 
 app.get('/profilepage', reactRoute);
 
-app.get('/login', reactRoute);
+app.get('/', reactRoute);
 
 app.get('/signup', reactRoute);
 
-app.get('/profilepage/username/:name', (req, res) => {
-  const name = req.params.name.toLowerCase();
-  sendUserAndTransactions(name, res);
-});
+// app.get('/profilepage/username/:name', (req, res) => {
+//   const name = req.params.name.toLowerCase();
+//   sendUserAndTransactions(name, res);
+// });
 
 if (!module.parent) {
   app.listen(PORT);
