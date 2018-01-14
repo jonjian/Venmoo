@@ -19,6 +19,8 @@ class Form extends React.Component {
     this.amountChangeHandler = this.amountChangeHandler.bind(this);
     this.messageChangeHandler = this.messageChangeHandler.bind(this);
     this.formSubmitHandler = this.formSubmitHandler.bind(this);
+    this.updateState = props.updateState;
+
   }
 
 
@@ -64,7 +66,7 @@ class Form extends React.Component {
     })
 
     .then((response) => {
-      console.log(response)
+      this.updateState();
     })
     .catch((error) => {
       throw error;
