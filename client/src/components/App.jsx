@@ -12,28 +12,28 @@ import VenmooTitle from './VenmooTitle.jsx';
 
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirectToProfilePage: false,
-      user: {},
-      transactionHist: [],
-    };
-    this.renderUser = this.renderUser.bind(this);
-    this.updateState = this.updateState.bind(this);
-  }
+    constructor(props) {
+      super(props);
+      this.state = {
+        redirectToProfilePage: false,
+        user: response.user,
+        transactionHist: response.transactions.slice(0,2),
+      };
+      this.renderUser = this.renderUser.bind(this);
+      this.updateState = this.updateState.bind(this);
+    }
 
-  updateState() {
-    axios.get(`/user/${this.state.user.id}`)
-      .then((data) => {
-        this.setState({
-          user: data.data.user,
-          transactionHist: data.data.transactions,
-        });
-      })
-      .catch(console.log);
-  }
-
+    updateState() {
+      console.log('fun called')
+      axios.get(`/user/${this.state.user.id}`)
+        .then((data) => {
+          this.setState({
+            user: data.data.user,
+            transactionHist: data.data.transactions,
+          });
+        })
+        .catch(console.log);
+    }
 
   renderUser(user, transactionHist) {
     this.setState({
