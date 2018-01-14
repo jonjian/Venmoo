@@ -10,7 +10,7 @@ const PendingTransactions = props => (
       .map(entry => (
         <PendingEntry
           entry={entry}
-          renderUser={props.renderUser}
+          updateState={props.updateState}
         />
     ))
   }

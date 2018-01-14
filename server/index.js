@@ -115,7 +115,11 @@ app.get('/user/:id/pending', (req, res) => {
 
 app.get('/user/:id', (req, res) => {
   const { id } = req.params;
-  db.getUser(id, data => res.send(JSON.stringify(data)));
+  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
+    res.status(404).send('invalid user id, should be a postive integer');
+  } else {
+    db.getUser(id, data => res.send(JSON.stringify(data)));
+  }
 });
 
 if (!module.parent) {

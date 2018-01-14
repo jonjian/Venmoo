@@ -25,7 +25,7 @@ class PendingEntry extends React.Component {
       isVisible: true,
     };
 
-    this.renderUser = props.renderUser;
+    this.updateState = props.updateState;
   }
 
   hide() {
@@ -38,12 +38,11 @@ class PendingEntry extends React.Component {
     const accept = () => {
       axios.post(`/transaction/accept/${id}-approved`);
       this.hide();
-      this.renderUser();
+      this.updateState();
     };
     const decline = () => {
       axios.post(`/transaction/accept/${id}-declined`);
       this.hide();
-      this.renderUser();
     };
     return (
       this.state.isVisible === true ?

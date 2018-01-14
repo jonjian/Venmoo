@@ -33,13 +33,15 @@ class ProfilePage extends React.Component {
         <div className="scrollingTransactions">
           <TransactionHistory
             transactionHist={this.props.transactionHist}
-            user={this.props.user} />
+            user={this.props.user}
+          />
         </div>
         <div> Transaction History </div>
         <PendingTransactions
           transactionHist={this.props.transactionHist}
           user={this.props.user}
-          renderUser={this.props.renderUser} />
+          updateState={this.props.updateState}
+        />
       </div>);
   }
 }
