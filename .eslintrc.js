@@ -3,6 +3,7 @@ module.exports = {
     "rules": {
         "func-names": "off",
         "import/extensions": "off",
-        "react/prefer-stateless-function": "off"
+        "react/prefer-stateless-function": "off",
+        "no-plusplus": "off",
     }
 };

@@ -77,7 +77,22 @@ body {
   background: #02c2db;
   border-radius: 15px;
   box-shadow: 0px 0px 8px black;
+}
+
+#login {
   margin-top: 200px;
+}
+
+#loginWarning {
+  color: red;
+}
+
+.display#loginWarning {
+  display: inline-block;
+}
+
+.hide#loginWarning {
+  display: none;
 }
 
 #contentSignUp {

@@ -4,7 +4,9 @@ import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap
 import jquery from 'jquery';
 import Axios from 'axios';
 
+import { insertBreaks } from './../helpers.jsx';
 import ProfilePage from './ProfilePage.jsx';
+import LoginWarning from './LoginWarning.jsx';
 
 class Login extends React.Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class Login extends React.Component {
       redirectToProfilePage: props.redirectToProfilePage,
       username: '',
       password: '',
+      displayWarning: false,
     };
     console.log(this.state);
   }
@@ -24,10 +27,18 @@ class Login extends React.Component {
       password,
     })
       .then((res) => {
-        console.log('data: ', res.data);
+        console.log('data: ', res);
         this.props.renderUser(res.data.user, res.data.transactions);
       })
-      .catch(err => console.error(err));
+      .catch((err) => {
+        if (err.response.status === 401) {
+          this.setState({
+            displayWarning: true,
+          });
+        } else {
+          console.error(err);
+        }
+      });
   }
 
   handleUsernameChange(event) {
@@ -43,15 +54,21 @@ class Login extends React.Component {
     this.postRequest(this.state.username, this.state.password);
   }
 
-  render() {
+  // renderLoginWarning() {
+  //   return (this.state.displayWarning) ? <LoginWarning /> : null;
+  // }
 
-    return (<div id="contentLogin">
-        <div>
+  // {this.state.displayWarning ? <LoginWarning /> : null}
+  render() {
+    return (
+      <div id="login">
+        <p id="loginWarning" className={this.state.displayWarning ? 'display' : 'hide'}>
+          Invalid username and/or password. Please try again, or sign up.
+        </p>
+        <div id="contentLogin">
           <form>
             <div>
-              <br />
-              <br />
-              <br />
+              {insertBreaks(3)}
               <label>Username:</label>
               <input type="text" onChange={this.handleUsernameChange.bind(this)} name="username" />
             </div>
@@ -59,23 +76,18 @@ class Login extends React.Component {
               <label>Password:</label>
               <input type="password" onChange={this.handlePasswordChange.bind(this)} name="password" />
             </div>
-            <div>
-              
-                <input className="loginButton" type="submit" onClick={this.handleSubmit.bind(this)} value="Log In" />
-              
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
+            <div>             
+              <input className="loginButton" type="submit" onClick={this.handleSubmit.bind(this)} value="Log In" />   
+              {insertBreaks(6)}
               <Link to="/signup">
                 <input className="loginButton" type="submit" value="No Account? Sign Up Here" />
               </Link>
             </div>
           </form>
         </div>
-      </div>);
+      </div>
+      
+    );
   }
 }
 

@@ -3,7 +3,7 @@ import { Card, CardBody, CardSubtitle, CardTitle, CardText, Button } from 'react
 const moment = require('moment');
 
 
-import { capitalize } from './../helpers.js';
+import { capitalize } from './../helpers.jsx';
 
 
 class TransactionEntry extends React.Component {
