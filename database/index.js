@@ -94,13 +94,15 @@ const createTransaction = (sender_id, receiver_id, amount, isPayment, callback) 
 
 
 const updateBalances = () => {
-  const response = ['success'];
-
+  // change status X
+  // change resolved_timestamp X
+  // change balance of both users
+  // const response = ['success'];
   const selectQ = `
     SELECT * FROM transactions order by id desc limit 1;
   `;
 
-  client.query(selectQ)
+  return client.query(selectQ)
     .then((res) => {
       const { sender_id, receiver_id, amount, type } = res.rows[0];
       const updateSender = `
@@ -188,6 +190,21 @@ const transactionAccept = (id, status, cb) => {
   }
 };
 
+const getUserBalance = (name) => {
+  return client.query(`select balance from users where name='${name}'`);
+}
+
+
+
+// const getPending = (sender_id, cb) => {
+//   const q = `SELECT * FROM transactions WHERE sender_id = ${sender_id}`;
+//   client.query(q, (err, res) => {
+//     if (err) throw err;
+//     console.log(r)
+//     cb(res.rows);
+//   });
+// };
+
 const getPending = (id, cb) => {
   client.query(`
       SELECT * from transactions
@@ -200,6 +217,7 @@ const getPending = (id, cb) => {
 };
 
 module.exports = {
+  getUserBalance,
   updateBalances,
   getUser,
   getTransactionHistory,
