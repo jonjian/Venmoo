@@ -21,8 +21,6 @@ class Login extends React.Component {
       success: (data) => {
         console.log('success: ', data);
         this.props.renderUser(data.user, data.transactions);
-        // console.log(data.user);
-        // console.log(data.transactions);
       },
       error: (err) => {
         console.log('error in ajax get ', err);
