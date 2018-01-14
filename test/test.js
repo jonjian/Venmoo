@@ -80,15 +80,15 @@ describe('Server', () => {
 
     it('should 201 when posting to /request', function(done) {
     request
-      .post('/payment')
-      .send({
-        senderObj: {id: 2},
-        username: 'annie',
-        amount: '20.00',
-        isPayment: false,
-      })
-      .expect(201, done)
-    });
+    .post('/request')
+    .send({
+      senderObj: {id: 2},
+      username: 'annie',
+      amount: '20.00',
+      isPayment: false,
+    })
+    .expect(201, done)
+  });
 
   })
 });
