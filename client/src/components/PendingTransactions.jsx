@@ -7,7 +7,12 @@ const PendingTransactions = props => (
     {props.transactionHist
       .filter(entry => (entry.status === 'pending' && entry.sender_id === props.user.id))
       .sort((a, b) => a.created_timestamp < b.created_timestamp ? 1 : -1 )
-      .map(entry => <PendingEntry entry={entry} />)
+      .map(entry => (
+        <PendingEntry
+          entry={entry}
+          updateState={props.updateState}
+        />
+    ))
   }
   </ol>
 );

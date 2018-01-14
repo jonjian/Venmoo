@@ -20,6 +20,7 @@ class Main extends React.Component {
         user={this.props.user}
         transactionHist={this.props.transactionHist}
         renderUser={this.props.renderUser}
+        updateState={this.props.updateState}
       />
     );
   }
@@ -28,7 +29,7 @@ class Main extends React.Component {
     return (
       <Login
         renderUser={this.props.renderUser}
-        user ={this.props.user}
+        user={this.props.user}
       />
     );
   }
