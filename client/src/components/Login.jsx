@@ -1,24 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, Switch, Redirect } from 'react-router-dom';
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import jquery from 'jquery';
+import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
 import { insertBreaks } from './../helpers.jsx';
-import ProfilePage from './ProfilePage.jsx';
-import LoginWarning from './LoginWarning.jsx';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    console.log('login: ', props);
     this.state = {
       redirectToProfilePage: props.redirectToProfilePage,
       username: '',
       password: '',
       displayWarning: false,
     };
-    console.log(this.state);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
   postRequest(username, password) {
@@ -27,7 +24,6 @@ class Login extends React.Component {
       password,
     })
       .then((res) => {
-        console.log('data: ', res);
         this.props.renderUser(res.data.user, res.data.transactions);
       })
       .catch((err) => {
@@ -50,15 +46,10 @@ class Login extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     this.postRequest(this.state.username, this.state.password);
   }
 
-  // renderLoginWarning() {
-  //   return (this.state.displayWarning) ? <LoginWarning /> : null;
-  // }
-
-  // {this.state.displayWarning ? <LoginWarning /> : null}
   render() {
     return (
       <div id="login">
@@ -70,14 +61,27 @@ class Login extends React.Component {
             <div>
               {insertBreaks(3)}
               <label>Username:</label>
-              <input type="text" onChange={this.handleUsernameChange.bind(this)} name="username" />
+              <input 
+                type="text" 
+                onChange={this.handleUsernameChange} 
+                name="username" 
+              />
             </div>
             <div>
               <label>Password:</label>
-              <input type="password" onChange={this.handlePasswordChange.bind(this)} name="password" />
+              <input 
+                type="password" 
+                onChange={this.handlePasswordChange} 
+                name="password" 
+              />
             </div>
-            <div>             
-              <input className="loginButton" type="submit" onClick={this.handleSubmit.bind(this)} value="Log In" />   
+            <div>     
+              <input 
+                className="loginButton"
+                type="submit"
+                onClick={this.handleSubmit}
+                value="Log In"
+              />
               {insertBreaks(6)}
               <Link to="/signup">
                 <input className="loginButton" type="submit" value="No Account? Sign Up Here" />
@@ -86,7 +90,6 @@ class Login extends React.Component {
           </form>
         </div>
       </div>
-      
     );
   }
 }
