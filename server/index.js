@@ -116,25 +116,25 @@ app.get('/', reactRoute);
 
 app.get('/signup', reactRoute);
 
-app.get('/profilepage/username/:name', (req, res) => {
-  const { name } = req.params;
+// app.get('/profilepage/username/:name', (req, res) => {
+//   const { name } = req.params;
 
-  const responseData = {};
+//   const responseData = {};
 
-  db.getUserByName(name)
-    .then((userData) => {
-      checkDatabaseResponse(userData, res);
-      responseData.user = userData.rows[0];
-      db.getTransactionHistory(name)
-        .then((transactionData) => {
-          checkDatabaseResponse(transactionData, res);
-          responseData.transactions = transactionData.rows;
-          res.status(200).json(responseData);
-        })
-        .catch(err => console.error(err));
-    })
-    .catch(err => console.error(err));
-});
+//   db.getUserByName(name)
+//     .then((userData) => {
+//       checkDatabaseResponse(userData, res);
+//       responseData.user = userData.rows[0];
+//       db.getTransactionHistory(name)
+//         .then((transactionData) => {
+//           checkDatabaseResponse(transactionData, res);
+//           responseData.transactions = transactionData.rows;
+//           res.status(200).json(responseData);
+//         })
+//         .catch(err => console.error(err));
+//     })
+//     .catch(err => console.error(err));
+// });
 
 app.post('/transaction/accept/:id-:status', (req, res) => {
   const { id, status } = req.params;

@@ -12,7 +12,7 @@ const databaseRespondsCorrectly = function (data, res) {
   return true;
 };
 
-const sendUserAndTransactions = function (username, req, res) {
+const sendUserAndTransactions = function (username, req, res, responseCode = 200) {
   const responseData = {};
 
   db.getUserByName(username)
@@ -29,11 +29,8 @@ const sendUserAndTransactions = function (username, req, res) {
             return;
           }
           console.log('sending response');
-          const statusCode = req.method === 'POST' ? 201 : 200;
-          console.log('method', res);
-
           responseData.transactions = transactionData.rows;
-          res.status(statusCode).json(responseData);
+          res.status(responseCode).json(responseData);
         })
         .catch(err => console.error(err));
     })

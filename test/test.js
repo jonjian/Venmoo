@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-// const ChaiAsPromi
 const server = require('./../server/index.js').app;
 const db = require('./../database/index.js');
 require('dotenv').config();
@@ -15,9 +14,6 @@ import Adapter from 'enzyme-adapter-react-16';
 import SignUp from '../client/src/components/SignUp.jsx';
 
 import { response } from './../database/dummy-data.js';
-
-
-
 
 configure({ adapter: new Adapter() });
 
@@ -41,22 +37,44 @@ describe('server', () => {
     });
   });
 
-  describe('GET /profilepage/username/:name', () => {
-    it('should 404 when given a nonexistent username', function(done) {
+  describe('login', () => {
+    it('should 401 when given a nonexistent username', function(done) {
       request
-        .get('/profilepage/username/ljsdflksd')
-        .expect(404, done);
+        .post('/profilepage')
+        .send({
+          username: 'jsdfja;sd;f',
+          password: '123',
+        })
+        .expect(401, done);
     });
 
-    it('should return 200 when a valid username is entered', function(done) {
+    it('should 401 when given an incorrect password', function(done) {
       request
-        .get('/profilepage/username/annie')
-        .expect(200, done);
+        .post('/profilepage')
+        .send({
+          username: 'annie',
+          password: 'hfdifhds',
+        })
+        .expect(401, done);
+    });
+
+    it('should return 200 when a valid username and password is entered', function(done) {
+      request
+      .post('/profilepage')
+      .send({
+        username: 'annie',
+        password: '123',
+      })
+      .expect(200, done);
     });
 
     it('should return an object with transactions and user objects', function (done) {
       request
-      .get('/profilepage/username/annie')
+      .post('/profilepage')
+      .send({
+        username: 'annie',
+        password: '123',
+      })
       .then((res) => {
         let data = JSON.parse(res.text);
         expect(data.hasOwnProperty('user')).to.equal(true);
