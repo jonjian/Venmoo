@@ -45,12 +45,6 @@ const getTransactionHistory = function (userName) {
   return client.query(userName ? specificUserQueryString : queryString);
 };
 
-// const getUser = (id, cb) => {
-//   client.query(`SELECT * from users WHERE id = ${id};`, (err, res) => {
-//     if (err) throw err;
-//     cb(res.rows);
-//   });
-// };
 
 const getUser = (id, cb) => {
   const q1 = `SELECT * from users WHERE id = ${id};`;
