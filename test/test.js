@@ -156,36 +156,20 @@ describe('Database', function() {
               .then(() => {
                 db.getUserBalance('connie')
                   .then((data) => {
-                    expect(data.rows[0].balance).to.equal(test - 41);
-                    done()
+                    test = test.slice(1).replace(/,/g, '');
+                    var newBalance = (parseFloat(test) - 33.33).toFixed(2);
+                    var newBalanceString = '$' + newBalance;
+                    expect(parseFloat(data.rows[0].balance.slice(1).replace(/,/g, '')).toFixed(2)).to.equal(newBalance);
+                    expect(done);
                   })
+                  .catch((error) => { throw error; });
               })
+              .catch((error) => { throw error; });
           })
+          .catch((error) => { throw error; });
 
       })
-
-
-
-      // .then((test) => {
-      //   console.log('test:', test);
-      //   db.getUserBalance('connie')
-      //     .then((data) => {
-      //       console.log(data.rows[0].balance)
-      //     })
-      // })
-      // TODO from the create Transactions:
-      // .then( (test) =>
-      //   {
-      //     db.updateBalances()
-      //     .then((test) => {
-      //
-      //       db.getUserBalance('connie')
-      //         .then((data) => {
-      //           console.log(data.rows[0].balance)
-      //         })
-      //     })}
-      // )
-
+      .catch((error) => { throw error; });
       })
   });
   describe('createTransaction', function() {
@@ -196,8 +180,8 @@ describe('Database', function() {
       return db.createTransaction(3, 4, '33.33', true)
         .then(db.getTransactionHistory('connie')
         .then((data, done) => {
-          expect(data.rows[data.rows.length - 1].amount).to.equal(33.33);
-          done();
+          expect(data.rows[data.rows.length - 1].amount).to.equal('$33.33');
+          expect(done);
         })
         )
     })
