@@ -67,10 +67,6 @@ app.post('/profilepage', passport.authenticate('local'), (req, res) => {
   sendUserAndTransactions(username, req, res);
 });
 
-
-// if user is in database
-// find user's balance, and update accordingly
-
 app.post('/request', (req, res) => {
   const {
     senderObj,
@@ -92,7 +88,6 @@ app.post('/request', (req, res) => {
     .catch((error) => { throw error; });
 });
 
-// comment to make change
 const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 
 app.get('/profile', reactRoute);
@@ -102,6 +97,9 @@ app.get('/profilepage', reactRoute);
 app.get('/', reactRoute);
 
 app.get('/signup', reactRoute);
+
+
+// });
 
 // app.get('/profilepage/username/:name', (req, res) => {
 //   const { name } = req.params;
@@ -116,32 +114,12 @@ app.get('/signup', reactRoute);
 //         .then((transactionData) => {
 //           checkDatabaseResponse(transactionData, res);
 //           responseData.transactions = transactionData.rows;
-//           res.status(200).json(responseData);
+//           res.redirect('/profilepage').json(responseData);
 //         })
 //         .catch(err => console.error(err));
 //     })
 //     .catch(err => console.error(err));
 // });
-
-app.get('/profilepage/username/:name', (req, res) => {
-  const { name } = req.params;
-
-  const responseData = {};
-
-  db.getUserByName(name)
-    .then((userData) => {
-      checkDatabaseResponse(userData, res);
-      responseData.user = userData.rows[0];
-      db.getTransactionHistory(name)
-        .then((transactionData) => {
-          checkDatabaseResponse(transactionData, res);
-          responseData.transactions = transactionData.rows;
-          res.redirect('/profilepage').json(responseData);
-        })
-        .catch(err => console.error(err));
-    })
-    .catch(err => console.error(err));
-});
 
 app.post('/transaction/accept/:id-:status', (req, res) => {
   const { id, status } = req.params;
