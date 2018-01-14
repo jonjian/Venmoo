@@ -92,7 +92,7 @@ body {
 #head {
   width: 100%;
   height: 275px;
-  background: url("http://wallpaperget.com/images/field-30.jpg");
+  background: url("./field.jpg");
   background-position: right bottom;
   background-size: cover;
   border-radius: 15px 15px 0 0;
@@ -103,7 +103,7 @@ body {
   height: 150px;
   margin-left: 225px;
   margin-top: -45px;
-  background: url("https://blog.jacksonsystems.com/wp-content/uploads/2011/09/cashcow1-e1316172109326-993x1024.jpg");
+  background: url("./cashcow.jpg");
   background-position: left top;
   background-size: cover;
   border-radius: 100px;
@@ -187,6 +187,11 @@ body.thin::-webkit-scrollbar {
     width: 100px;
 }
 
+.dropdown {
+  float: right;
+  height: 50px;
+  width: 100px;
+}
 
 .icon {
     fill: white; 
