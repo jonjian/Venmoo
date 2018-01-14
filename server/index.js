@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config();
 const expressRenderJsx = require('express-render-jsx');
+let expressValidator = require('express-validator');
 
 const db = require('../database');
 const { sendUserAndTransactions, databaseRespondsCorrectly } = require('./../helpers/index.js');
@@ -30,9 +31,9 @@ passport.use(new LocalStrategy((username, password, done) => {
       return done(null, false);
     })
     .catch(err => done(err));
-  
 }));
 
+app.use(expressValidator());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.json());
 
@@ -50,19 +51,19 @@ app.post('/payment', (req, res) => {
     .then((data) => {
       const { id } = data.rows[0];
       db.createTransaction(senderObj.id, id, amount, isPayment)
-      .then(db.updateBalances)
-      .then(() => {
-        res.statusCode = 201;
-        res.end();
-      })
+        .then(db.updateBalances)
+        .then(() => {
+          res.statusCode = 201;
+          res.end();
+        })
 
-      .catch((error) => { throw error; });
+        .catch((error) => { throw error; });
     })
     .catch((error) => { throw error; });
 });
 
 app.post('/profilepage', passport.authenticate('local'), (req, res) => {
-  let { username } = req.body;
+  const { username } = req.body;
   sendUserAndTransactions(username, req, res);
 });
 
@@ -91,8 +92,10 @@ app.post('/request', (req, res) => {
     .catch((error) => { throw error; });
 });
 
-//comment to make change
+// comment to make change
 const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
+
+app.get('/profile', reactRoute);
 
 app.get('/profilepage', reactRoute);
 
@@ -120,6 +123,26 @@ app.get('/signup', reactRoute);
 //     .catch(err => console.error(err));
 // });
 
+app.get('/profilepage/username/:name', (req, res) => {
+  const { name } = req.params;
+
+  const responseData = {};
+
+  db.getUserByName(name)
+    .then((userData) => {
+      checkDatabaseResponse(userData, res);
+      responseData.user = userData.rows[0];
+      db.getTransactionHistory(name)
+        .then((transactionData) => {
+          checkDatabaseResponse(transactionData, res);
+          responseData.transactions = transactionData.rows;
+          res.redirect('/profilepage').json(responseData);
+        })
+        .catch(err => console.error(err));
+    })
+    .catch(err => console.error(err));
+});
+
 app.post('/transaction/accept/:id-:status', (req, res) => {
   const { id, status } = req.params;
   if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
@@ -130,7 +153,6 @@ app.post('/transaction/accept/:id-:status', (req, res) => {
     db.transactionAccept(id, status, (data) => { res.send(data); });
   }
 });
-
 
 
 app.get('/user/:id/pending', (req, res) => {
