@@ -4,7 +4,6 @@ import { Link, Route, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import axios from 'axios';
 
-
 import { response } from './../../../database/dummy-data.js';
 import Login from './Login.jsx';
 import Main from './Main.jsx';
@@ -42,7 +41,6 @@ class App extends React.Component {
       transactionHist,
       redirectToProfilePage: true,
     });
-    // this.props.history.push('/profilepage');
   }
 
   render() {
