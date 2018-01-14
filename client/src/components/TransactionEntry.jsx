@@ -2,16 +2,8 @@ import React from 'react';
 import { Card, CardBody, CardSubtitle, CardTitle, CardText, Button } from 'reactstrap'
 const moment = require('moment');
 
-// const moment = x => x
 
-// const TransactionEntry = props => (
-//   <div>
-//     Entry
-//   </div>
-// );
-const capitalize = function (string) {
-  return string.slice(0, 1).toUpperCase() + string.slice(1);
-};
+import { capitalize } from './../helpers.js';
 
 
 class TransactionEntry extends React.Component {
@@ -28,14 +20,6 @@ class TransactionEntry extends React.Component {
     const text = (sender === 'you')
       ? `${sender} paid ${receiver} ${transaction.amount}`
       : `${receiver} charged ${sender} ${transaction.amount}`;
-
-    // if (transaction.type === 'payment') {
-    //   text = `${sender} paid ${receiver} ${transaction.amount}`;
-    //   timestamp = transaction.resolved_timestamp;
-    // } else if (transaction.type === 'request') {
-    //   text = `${receiver} charged ${sender} ${transaction.amount}`;
-    //   timestamp = transaction.created_timestamp;
-    // }
 
     return (
         <div id="transactionCard">

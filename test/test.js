@@ -15,9 +15,6 @@ import SignUp from '../client/src/components/SignUp.jsx';
 
 import { response } from './../database/dummy-data.js';
 
-
-
-
 configure({ adapter: new Adapter() });
 
 describe('Server', () => {
@@ -40,29 +37,58 @@ describe('Server', () => {
     });
   });
 
-  describe('GET /profilepage/username/:name', () => {
-    xit('should 404 when given a nonexistent username', function(done) {
+  describe('login', () => {
+    it('should 401 when given a nonexistent username', function(done) {
       request
-        .get('/profilepage/username/ljsdflksd')
-        .expect(404, done);
+        .post('/profilepage')
+        .send({
+          username: 'jsdfja;sd;f',
+          password: '123',
+        })
+        .expect(401, done);
     });
 
-    xit('should return 200 when a valid username is entered', function(done) {
+    it('should 401 when given an incorrect password', function(done) {
       request
-        .get('/profilepage/username/annie')
-        .expect(200, done);
+        .post('/profilepage')
+        .send({
+          username: 'annie',
+          password: 'hfdifhds',
+        })
+        .expect(401, done);
     });
 
-    xit('should return an object with transactions and user objects')
+    it('should return 200 when a valid username and password is entered', function(done) {
       request
-        .get('/profilepage/username/annie')
-        .then((res) => {
-          let data = JSON.parse(res.text);
-          expect(data.hasOwnProperty('user')).to.equal(true);
-          expect(data.user.name).to.equal('annie');
-          expect(data.hasOwnProperty('transactions')).to.equal(true);
-          // expect(data.transactions[0].transaction_id).to.equal(1);
-        });
+      .post('/profilepage')
+      .send({
+        username: 'annie',
+        password: '123',
+      })
+      .expect(200, done);
+    });
+
+    it('should return an object with transactions and user objects', function (done) {
+      request
+      .post('/profilepage')
+      .send({
+        username: 'annie',
+        password: '123',
+      })
+      .then((res) => {
+        let data = JSON.parse(res.text);
+        expect(data.hasOwnProperty('user')).to.equal(true);
+        expect(data.user.name).to.equal('annie');
+        expect(data.hasOwnProperty('transactions')).to.equal(true);
+        done();
+      })
+      .catch(err => {
+        expect(err).to.equal(undefined);
+        console.error(err)
+        done();
+      });
+    })
+      
   });
 
   describe('POST /payments and /request', () => {

@@ -1,56 +1,68 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch, Redirect } from 'react-router-dom';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import jquery from 'jquery';
+import Axios from 'axios';
 
 import ProfilePage from './ProfilePage.jsx';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    console.log('login: ', props);
     this.state = {
+      redirectToProfilePage: props.redirectToProfilePage,
       username: '',
+      password: '',
     };
+    console.log(this.state);
   }
 
-  getRequest() {
-    jquery.ajax({
-      url: `/profilepage/username/${this.state.username}`,
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        console.log('success: ', data);
-        this.props.renderUser(data.user, data.transactions);
-      },
-      error: (err) => {
-        console.log('error in ajax get ', err);
-      },
-    });
+  postRequest(username, password) {
+    Axios.post('/profilepage', {
+      username,
+      password,
+    })
+      .then((res) => {
+        console.log('data: ', res.data);
+        this.props.renderUser(res.data.user, res.data.transactions);
+      })
+      .catch(err => console.error(err));
   }
 
-  handleChange(event) {
+  handleUsernameChange(event) {
     this.setState({ username: event.target.value });
   }
 
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.postRequest(this.state.username, this.state.password);
+  }
+
   render() {
+
     return (<div id="contentLogin">
         <div>
-          <form action="/login" method="post">
+          <form>
             <div>
               <br />
               <br />
               <br />
               <label>Username:</label>
-              <input type="text" onChange={this.handleChange.bind(this)} name="username" />
+              <input type="text" onChange={this.handleUsernameChange.bind(this)} name="username" />
             </div>
             <div>
               <label>Password:</label>
-              <input type="password" name="password" />
+              <input type="password" onChange={this.handlePasswordChange.bind(this)} name="password" />
             </div>
             <div>
-              <Link to={`/profilepage/username/${this.state.username}`}>
-                <input className="loginButton" type="submit" onClick={() => this.getRequest()} value="Log In" />
-              </Link>
+              
+                <input className="loginButton" type="submit" onClick={this.handleSubmit.bind(this)} value="Log In" />
+              
               <br />
               <br />
               <br />

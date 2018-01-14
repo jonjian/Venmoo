@@ -3,6 +3,7 @@ import React from 'react';
 import Form from './Form.jsx';
 import TransactionHistory from './TransactionHistory.jsx';
 import PendingTransactions from './PendingTransactions.jsx';
+import { capitalize } from './../helpers.js';
 
 
 class ProfilePage extends React.Component {
@@ -16,7 +17,7 @@ class ProfilePage extends React.Component {
         <div id="profile_pic" />
         <div id="head">
           <div id="name">
-              <h1>{`Hello, ${this.props.user.name}`} </h1>
+              <h1>{`Hello, ${capitalize(this.props.user.name)}`} </h1>
             </div>
           <br />
           <br />
@@ -45,5 +46,6 @@ class ProfilePage extends React.Component {
       </div>);
   }
 }
+
 
 export default ProfilePage;

@@ -4,7 +4,6 @@ import { Link, Route, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import axios from 'axios';
 
-
 import { response } from './../../../database/dummy-data.js';
 import Login from './Login.jsx';
 import Main from './Main.jsx';
@@ -16,8 +15,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: response.user,
-      transactionHist: response.transactions,
+      redirectToProfilePage: false,
+      user: {},
+      transactionHist: [],
     };
     this.renderUser = this.renderUser.bind(this);
     this.updateState = this.updateState.bind(this);
@@ -34,10 +34,12 @@ class App extends React.Component {
       .catch(console.log);
   }
 
-  renderUser(user, history) {
+
+  renderUser(user, transactionHist) {
     this.setState({
       user,
-      transactionHist: history,
+      transactionHist,
+      redirectToProfilePage: true,
     });
   }
 
@@ -49,6 +51,7 @@ class App extends React.Component {
           user={this.state.user}
           transactionHist={this.state.transactionHist}
           renderUser={this.renderUser}
+          redirectToProfilePage={this.state.redirectToProfilePage}
           updateState={this.updateState}
         />
       </div>

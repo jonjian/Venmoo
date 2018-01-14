@@ -1,15 +1,40 @@
 const path = require('path');
 const express = require('express');
-const bodyParser = require('body-parser')
-require('dotenv').config();
-const db = require('../database');
+const bodyParser = require('body-parser');
+const dotenv = require('dotenv').config();
 const expressRenderJsx = require('express-render-jsx');
+
+const db = require('../database');
+const { sendUserAndTransactions, databaseRespondsCorrectly } = require('./../helpers/index.js');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+const passport = require('passport');
+const { Strategy: LocalStrategy } = require('passport-local');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.use(new LocalStrategy((username, password, done) => {
+  db.getUserByName(username)
+    .then((data) => {
+      if (data.rows.length && data.rows[0].password === password) {
+        return done(null, data.rows[0]);
+      }
+      console.log('Invalid username/password submitted');
+      return done(null, false);
+    })
+    .catch(err => done(err));
+  
+}));
+
 app.use(express.static(path.join(__dirname, '../client/dist')));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 
 // `select * from transactions where id = (select last_value from transactions_id_seq);`
@@ -34,6 +59,11 @@ app.post('/payment', (req, res) => {
       .catch((error) => { throw error; });
     })
     .catch((error) => { throw error; });
+});
+
+app.post('/profilepage', passport.authenticate('local'), (req, res) => {
+  let { username } = req.body;
+  sendUserAndTransactions(username, req, res);
 });
 
 
@@ -66,29 +96,29 @@ const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client
 
 app.get('/profilepage', reactRoute);
 
-app.get('/login', reactRoute);
+app.get('/', reactRoute);
 
 app.get('/signup', reactRoute);
 
-app.get('/profilepage/username/:name', (req, res) => {
-  const { name } = req.params;
+// app.get('/profilepage/username/:name', (req, res) => {
+//   const { name } = req.params;
 
-  const responseData = {};
+//   const responseData = {};
 
-  db.getUserByName(name)
-    .then((userData) => {
-      checkDatabaseResponse(userData, res);
-      responseData.user = userData.rows[0];
-      db.getTransactionHistory(name)
-        .then((transactionData) => {
-          checkDatabaseResponse(transactionData, res);
-          responseData.transactions = transactionData.rows;
-          res.status(200).json(responseData);
-        })
-        .catch(err => console.error(err));
-    })
-    .catch(err => console.error(err));
-});
+//   db.getUserByName(name)
+//     .then((userData) => {
+//       checkDatabaseResponse(userData, res);
+//       responseData.user = userData.rows[0];
+//       db.getTransactionHistory(name)
+//         .then((transactionData) => {
+//           checkDatabaseResponse(transactionData, res);
+//           responseData.transactions = transactionData.rows;
+//           res.status(200).json(responseData);
+//         })
+//         .catch(err => console.error(err));
+//     })
+//     .catch(err => console.error(err));
+// });
 
 app.post('/transaction/accept/:id-:status', (req, res) => {
   const { id, status } = req.params;
@@ -128,8 +158,5 @@ if (!module.parent) {
   console.log(`Listening on ${PORT}`);
 }
 
-const checkDatabaseResponse = function (data, res) {
-  if (data.length === 0 || data.rows.length === 0) res.sendStatus(404);
-};
 
 module.exports.app = app;
