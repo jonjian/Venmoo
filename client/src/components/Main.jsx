@@ -40,6 +40,7 @@ class Main extends React.Component {
         user={this.props.user}
         transactionHist={this.props.transactionHist}
         renderUser={this.props.renderUser}
+        updateState={this.props.updateState}
       />
     );
   }

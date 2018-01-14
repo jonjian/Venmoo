@@ -50,12 +50,13 @@ app.post('/payment', (req, res) => {
     .then((data) => {
       const { id } = data.rows[0];
       db.createTransaction(senderObj.id, id, amount, isPayment)
-        .then(db.updateBalances)
-        .then(() => {
-          res.statusCode = 201;
-          res.end();
-        })
-        .catch((error) => { throw error; });
+      .then(db.updateBalances)
+      .then(() => {
+        res.statusCode = 201;
+        res.end();
+      })
+
+      .catch((error) => { throw error; });
     })
     .catch((error) => { throw error; });
 });
@@ -88,23 +89,6 @@ app.post('/request', (req, res) => {
         .catch((error) => { throw error; });
     })
     .catch((error) => { throw error; });
-});
-
-
-app.get('/user/:id', (req, res) => {
-  const { id } = req.params;
-  if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
-    res.status(404).send('invalid user id, should be a postive integer');
-  } else {
-    db.getUser(id, (data) => {
-      if (data.length === 0) {
-        res.status(404);
-        res.send('no user in database with matching id');
-      } else {
-        res.send(JSON.stringify(data[0]));
-      }
-    });
-  }
 });
 
 //comment to make change
@@ -165,14 +149,7 @@ app.get('/user/:id', (req, res) => {
   if (isNaN(Number(id)) || Number(id) % 1 !== 0) {
     res.status(404).send('invalid user id, should be a postive integer');
   } else {
-    db.getUser(id, (data) => {
-      if (data.length === 0) {
-        res.status(404);
-        res.send('no user in database with matching id');
-      } else {
-        res.send(JSON.stringify(data));
-      }
-    });
+    db.getUser(id, data => res.send(JSON.stringify(data)));
   }
 });
 

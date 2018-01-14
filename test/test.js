@@ -17,16 +17,16 @@ import { response } from './../database/dummy-data.js';
 
 configure({ adapter: new Adapter() });
 
-describe('server', () => {
+describe('Server', () => {
   describe('GET /user/:id', () => {
-    it('should return an object of user info when id is a user', function(done) {
+    xit('should return an object of user info when id is a user', function(done) {
       request
         .get('/user/1')
         .expect(200)
         .expect(/annie/, done);
     });
 
-    it('should 404 when given an invalid user id', function(done) {
+    xit('should 404 when given an invalid user id', function(done) {
       request
         .get('/user/999999')
         .expect(404, done);
@@ -106,7 +106,7 @@ describe('server', () => {
 
     it('should 201 when posting to /request', function(done) {
     request
-    .post('/payment')
+    .post('/request')
     .send({
       senderObj: {id: 2},
       username: 'annie',
@@ -114,7 +114,7 @@ describe('server', () => {
       isPayment: false,
     })
     .expect(201, done)
-    });
+  });
 
   })
 });
@@ -136,7 +136,7 @@ describe('Client', function() {
   });
 });
 
-
+// tests for DB
 describe('Database', function() {
   describe('getTransactionHistory', function() {
     it('should be a function', function() {
@@ -160,8 +160,56 @@ describe('Database', function() {
         expect(dataEntry.hasOwnProperty('created_timestamp')).to.equal(true);
         expect(dataEntry.hasOwnProperty('resolved_timestamp')).to.equal(true);
         expect(dataEntry.hasOwnProperty('description')).to.equal(true);
-
       }))
     })
   });
+  describe('updateBalances', function() {
+    it('should be a function', function() {
+      expect(db.updateBalances).to.be.a('function');
+    });
+
+    it('should update balance', function() {
+      db.getUserBalance('connie')
+      .then((balance) => {
+        let test = balance.rows[0].balance;
+
+        return test;
+      })
+      .then((test, done) => {
+        db.createTransaction(3, 4, '33.33', true)
+          .then(() => {
+            db.updateBalances()
+              .then(() => {
+                db.getUserBalance('connie')
+                  .then((data) => {
+                    test = test.slice(1).replace(/,/g, '');
+                    var newBalance = (parseFloat(test) - 33.33).toFixed(2);
+                    var newBalanceString = '$' + newBalance;
+                    expect(parseFloat(data.rows[0].balance.slice(1).replace(/,/g, '')).toFixed(2)).to.equal(newBalance);
+                    expect(done);
+                  })
+                  .catch((error) => { throw error; });
+              })
+              .catch((error) => { throw error; });
+          })
+          .catch((error) => { throw error; });
+
+      })
+      .catch((error) => { throw error; });
+      })
+  });
+  describe('createTransaction', function() {
+    it('should be a function', function() {
+      expect(db.getTransactionHistory).to.be.a('function');
+    });
+    it('should create transaction in table', function() {
+      return db.createTransaction(3, 4, '33.33', true)
+        .then(db.getTransactionHistory('connie')
+        .then((data, done) => {
+          expect(data.rows[data.rows.length - 1].amount).to.equal('$33.33');
+          expect(done);
+        })
+        )
+    })
+  })
 });

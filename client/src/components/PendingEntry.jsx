@@ -24,18 +24,21 @@ class PendingEntry extends React.Component {
       entry: props.entry,
       isVisible: true,
     };
+
+    this.updateState = props.updateState;
   }
 
   hide() {
     this.setState({ isVisible: false });
   }
 
-// &npbsp; is a single space
+  // &npbsp; is a single space
   render() {
     const id = this.state.entry.transaction_id;
     const accept = () => {
       axios.post(`/transaction/accept/${id}-approved`);
       this.hide();
+      this.updateState();
     };
     const decline = () => {
       axios.post(`/transaction/accept/${id}-declined`);

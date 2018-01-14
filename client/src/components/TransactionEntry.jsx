@@ -30,7 +30,6 @@ class TransactionEntry extends React.Component {
         <CardText>
           {text}
         </CardText>
-        <Button>View Profile</Button>
       </CardBody>
     </Card>
   </div>
