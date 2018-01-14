@@ -28,7 +28,6 @@ class ProfilePage extends React.Component {
 
   render() {
     return (
-      <div>
       <div id="content">
         <div id="profile_pic" />
         <div id="head">
