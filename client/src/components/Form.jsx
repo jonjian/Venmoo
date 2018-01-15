@@ -12,6 +12,9 @@ class Form extends React.Component {
       amount: '',
       message: '',
       validAmount: false,
+      userWarning: false,
+      amountWarning: false,
+
     };
 
     this.togglePaymentTrue = this.togglePaymentTrue.bind(this);
@@ -43,11 +46,14 @@ class Form extends React.Component {
   otherUserChangeHandler(event) {
     event.preventDefault();
     this.setState({otherUser: event.target.value})
+    this.setState({userWarning: false})
+
   }
 
   amountChangeHandler(event) {
     event.preventDefault();
     this.setState({amount: event.target.value})
+    this.setState({amountWarning: false})
 
     const amountRegex = /^[0-9]+(\.[0-9][0-9])?$/;
     let bool = !!(event.target.value.match(amountRegex) !==  null)
@@ -65,6 +71,9 @@ class Form extends React.Component {
       return this.formSubmitHandler(event);
     } else {
       console.log('No submission: bad dollar amount') // TODO
+      this.setState({
+        amountWarning: true,
+      });
     }
   }
 
@@ -86,6 +95,9 @@ class Form extends React.Component {
     })
     .catch((error) => {
       console.log('invalid username') //TODO flesh this out
+      this.setState({
+        userWarning: true,
+      });
       throw error;
     });
   }
@@ -104,10 +116,16 @@ class Form extends React.Component {
           <br />
           <label> To: </label>
           <input type="textarea" onChange={this.otherUserChangeHandler} />
+          <p id="loginWarning" className={this.state.userWarning ? 'display' : 'hide'}>
+            Invalid Username
+          </p>
           <br />
           <br />
           <label> Amount: </label>
           $<input type="textarea" onChange={this.amountChangeHandler} />
+        <p id="loginWarning" className={this.state.amountWarning ? 'display' : 'hide'}>
+            Invalid Money Format
+          </p>
           <br />
           <br />
           <label> Message: </label>
