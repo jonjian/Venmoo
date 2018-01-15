@@ -10,7 +10,8 @@ class Form extends React.Component {
       isPayment: true,
       otherUser: '',
       amount: '',
-      message: ''
+      message: '',
+      validAmount: false,
     };
 
     this.togglePaymentTrue = this.togglePaymentTrue.bind(this);
@@ -19,8 +20,9 @@ class Form extends React.Component {
     this.amountChangeHandler = this.amountChangeHandler.bind(this);
     this.messageChangeHandler = this.messageChangeHandler.bind(this);
     this.formSubmitHandler = this.formSubmitHandler.bind(this);
-    this.updateState = props.updateState;
+    this.formSubmitHandlerGate = this.formSubmitHandlerGate.bind(this);
 
+    this.updateState = props.updateState;
   }
 
 
@@ -46,11 +48,24 @@ class Form extends React.Component {
   amountChangeHandler(event) {
     event.preventDefault();
     this.setState({amount: event.target.value})
+
+    const amountRegex = /^[0-9]+(\.[0-9][0-9])?$/;
+    let bool = !!(event.target.value.match(amountRegex) !==  null)
+    this.setState({ validAmount: bool });
   }
 
   messageChangeHandler(event) {
     event.preventDefault();
     this.setState({message: event.target.value})
+  }
+
+  formSubmitHandlerGate(event) {
+    event.preventDefault();
+    if (this.state.validAmount === true) {
+      return this.formSubmitHandler(event);
+    } else {
+      console.log('No submission: bad dollar amount') // TODO
+    }
   }
 
   formSubmitHandler(event) {
@@ -66,9 +81,11 @@ class Form extends React.Component {
     })
 
     .then((response) => {
+
       this.updateState();
     })
     .catch((error) => {
+      console.log('invalid username') //TODO flesh this out
       throw error;
     });
   }
@@ -82,7 +99,7 @@ class Form extends React.Component {
           <button type="submit" onClick={this.togglePaymentFalse}> Request </button>
         </div>
 
-        <form onSubmit={this.formSubmitHandler}>
+        <form onSubmit={this.formSubmitHandlerGate}>
           <br />
           <br />
           <label> To: </label>
