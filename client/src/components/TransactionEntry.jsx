@@ -17,9 +17,8 @@ class TransactionEntry extends React.Component {
     const receiver = capitalize(transaction.receiver_name === user.name ? 'you' : transaction.receiver_name);
 
     const timestamp = transaction.resolved_timestamp;
-    const text = (sender === 'you')
-      ? `${sender} paid ${receiver} ${transaction.amount}`
-      : `${receiver} charged ${sender} ${transaction.amount}`;
+    const text = `${sender} paid ${receiver} ${transaction.amount}`;
+
 
     return (
         <div id="transactionCard">
