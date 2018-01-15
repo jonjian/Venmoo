@@ -49,15 +49,19 @@ app.post('/payment', (req, res) => {
   } = req.body;
   db.getUserByName(username)
     .then((data) => {
-      const { id } = data.rows[0];
-      db.createTransaction(senderObj.id, id, amount, isPayment)
-        .then(db.updateBalances)
-        .then(() => {
-          res.statusCode = 201;
-          res.end();
-        })
-
-        .catch((error) => { throw error; });
+      if (data.rows.length > 0) {
+        const { id } = data.rows[0];
+        db.createTransaction(senderObj.id, id, amount, isPayment)
+          .then(db.updateBalances)
+          .then(() => {
+            res.statusCode = 201;
+            res.end();
+          })
+          .catch((error) => { throw error; });
+      } else {
+        res.statusCode = 404;
+        res.end();
+      }
     })
     .catch((error) => { throw error; });
 });
