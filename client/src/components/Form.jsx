@@ -90,7 +90,6 @@ class Form extends React.Component {
     })
 
     .then((response) => {
-
       this.updateState();
     })
     .catch((error) => {
